@@ -13,7 +13,7 @@ import java.util.List;
 
         public List<User> queryUserInfo();
 
-        public List<User> queryMyMsg(String user_id);
+        public List<User> queryMyMsg(String user_phone);
 
         public int editMyMsg(User u);
     }
