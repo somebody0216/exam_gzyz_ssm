@@ -1,6 +1,7 @@
 package gzyz.user_mode.pojo;
 
 public class User {
+    private int userRole;
     private String userID;
     private String userImg;
     private String userPhone;
@@ -11,7 +12,10 @@ public class User {
     public User() {
     }
 
-    public User(String userID, String userImg, String userPhone, String userName, String userPwd, String createTime) {
+
+
+    public User(int userRole, String userID, String userImg, String userPhone, String userName, String userPwd, String createTime) {
+        this.userRole = userRole;
         this.userID = userID;
         this.userImg = userImg;
         this.userPhone = userPhone;
@@ -22,14 +26,23 @@ public class User {
 
     @Override
     public String toString() {
-        return "user{" +
-                "userID='" + userID + '\'' +
+        return "User{" +
+                "userRole='" + userRole + '\'' +
+                ", userID='" + userID + '\'' +
                 ", userImg='" + userImg + '\'' +
                 ", userPhone='" + userPhone + '\'' +
                 ", userName='" + userName + '\'' +
                 ", userPwd='" + userPwd + '\'' +
                 ", createTime='" + createTime + '\'' +
                 '}';
+    }
+
+    public int getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(int userRole) {
+        this.userRole = userRole;
     }
 
     public String getUserID() {

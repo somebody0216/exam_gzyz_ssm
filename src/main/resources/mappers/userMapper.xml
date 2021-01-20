@@ -2,13 +2,23 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gzyz.user_mode.dao">
+<mapper namespace="gzyz.user_mode.dao.UserDao">
 
-    <insert id="insertUser" parameterType="gzyz.user_mode.pojo.User">
-        insert into exam_user(uid,acc,pwd,phone,isdelete) values(#{uid},#{acc},#{pwd},#{phone},0)
+    <insert id="addUserInfo" parameterType="gzyz.user_mode.pojo.User">
+        insert into exam_user(user_role,user_id,user_phone,user_pwd,isdelete,create_time) values(#{userRole},#{userId},#{userPhone},#{userPwd},0,#{createTime})
     </insert>
 
-    <select id="selectUser" resultType="MySSMPractice_1.MyProject.pojo.User">
-        select * from user where isdelete=0
+    <select id="queryUserInfo" resultType="gzyz.user_mode.pojo.User">
+        select * from exam_user where user_role=0 and isdelete=0
     </select>
+
+    <select id="queryMyMsg" parameterType="string" resultType="gzyz.user_mode.pojo.User">
+        select * from exam_user where user_id=#{value} and user_role=0 and isdelete=0
+    </select>
+    
+    <update id="editMyMsg" parameterType="gzyz.user_mode.pojo.User">
+        update exam_user set user_img=#{userImg} and user_phone=#{userImg} and user_name=#{userImg} and user_pwd=#{userImg} where user_id=#{userId}
+    </update>
+
+
 </mapper>
