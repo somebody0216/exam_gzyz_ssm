@@ -32,12 +32,12 @@ public class UserController {
     @RequestMapping("/user/register")
     @ResponseBody
     public String userRegister(String user_phone,String user_pwd){
-        String flag="注册失败";
+        String flag="0";
         boolean b = userService.verifyRegister(user_phone);
         if (b=false){
             int i = userService.addUser(user_phone, user_pwd);
             if(i==1){
-                flag="注册成功";
+                flag="1";
             }
         }
         return flag;
@@ -47,10 +47,10 @@ public class UserController {
     @RequestMapping("/user/login")
     @ResponseBody
     public String userLogin(String user_phone,String user_pwd){
-    String flag="登录失败";
+    String flag="0";
         boolean b = userService.verifyLogin(user_phone, user_pwd);
         if(b==true){
-            flag="登录成功";
+            flag="1";
         }
         return flag;
     }
@@ -67,18 +67,19 @@ public class UserController {
 //    用户修改信息
    @RequestMapping("/user/editMyMsg")
     public String editMyMsg(@RequestBody User u){
-        String flag="修改失败";
-       int i = userService.ModifyUserInfo(u.getUserID(), u.getUserImg(), u.getUserPhone(), u.getUserName(), u.getUserPwd());
+        String flag="0";
+       int i = userService.ModifyUserInfo(u.getUserID(),  u.getUserName(), u.getUserPwd());
        if(i==1){
-           flag="修改成功";
+           flag="1";
        }
        return flag;
     }
 
 //    头像上传
-    @RequestMapping("/user/fileUpload")
+    @RequestMapping("/user/ImgUpload")
     @ResponseBody
-    public void fileUpload(HttpServletRequest request){
+    public String ImgUpload(@RequestBody User u,HttpServletRequest request){
+        String flag="0";
         //上传文件环境准备w
 //        本地文件传输到服务器端  服务器端存储文件的目录
         String savePath = request.getServletContext().getRealPath("/uploadFile");
@@ -113,9 +114,7 @@ public class UserController {
 //        设定上传文件名的中文编码
         upload.setHeaderEncoding("UTF-8");
 //        判定当前请求携带上传数据的流格式是否为formdata格式（普通形式，非Ajax）
-        if(!ServletFileUpload.isMultipartContent(request)){
-            return;
-        }
+
 //        单个文件最大1MB
         upload.setFileSizeMax(1024*1024);
 //        设定上传总量10MB
@@ -151,7 +150,16 @@ public class UserController {
 //                    获取最终存储路径+UUID的文件名称
 //                    uploadFile\xxxxx\UUID_xxx.txt
                     String realSavePath = userService.makePath(savePath);
+                    String realname=realSavePath+"\\"+saveFileName;
                     FileOutputStream out = new FileOutputStream(realSavePath + "\\" + saveFileName);
+
+
+                    int i = userService.ModifyUserImg(u.getUserPhone(), realname);
+                    if(i==1){
+                        flag="1";
+                    }
+
+
 //                    创建缓冲区
                     byte[] buffer = new byte[10244];
                     int len=0;
@@ -171,7 +179,7 @@ public class UserController {
             e.printStackTrace();
         }
 
-
+        return flag;
     }
 
 }

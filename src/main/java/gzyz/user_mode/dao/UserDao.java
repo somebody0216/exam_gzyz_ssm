@@ -16,4 +16,6 @@ import java.util.List;
         public List<User> queryMyMsg(String user_phone);
 
         public int editMyMsg(User u);
+
+        public int ImgChange(User u);
     }

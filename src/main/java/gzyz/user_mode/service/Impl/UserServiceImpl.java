@@ -64,19 +64,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> queryMyMsg(String user_id) {
-        return userDao.queryMyMsg(user_id);
+    public List<User> queryMyMsg(String user_phone) {
+        return userDao.queryMyMsg(user_phone);
     }
 
     @Override
-    public int ModifyUserInfo(String user_id, String user_img, String user_phone, String user_name, String user_pwd) {
+    public int ModifyUserInfo(String user_id, String user_name, String user_pwd) {
         User u = new User();
         u.setUserID(user_id);
-        u.setUserImg(user_img);
-        u.setUserPhone(user_phone);
         u.setUserName(user_name);
         u.setUserPwd(user_pwd);
         int i = userDao.editMyMsg(u);
+        return i;
+    }
+
+    @Override
+    public int ModifyUserImg(String user_phone,String user_img) {
+       User u = new User();
+       u.setUserPhone(user_phone);
+       u.setUserImg(user_img);
+        int i = userDao.ImgChange(u);
+
         return i;
     }
 

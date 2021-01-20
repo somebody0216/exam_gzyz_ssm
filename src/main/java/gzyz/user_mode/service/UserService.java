@@ -21,7 +21,10 @@ public interface UserService {
     public List<User> queryMyMsg(String user_phone);
 
 
-    public int ModifyUserInfo(String user_id,String user_img,String user_phone,String user_name,String user_pwd);
+    public int ModifyUserInfo(String user_id,String user_name,String user_pwd);
+
+
+    public int ModifyUserImg(String user_phone,String user_img);
     //        真实文件名  UUID_xxx.txt
     public  String makeFileName(String fileName);
 
