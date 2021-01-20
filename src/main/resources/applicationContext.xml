@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-ax.xsd
+       http://www.springframework.org/schema/mvc
+       https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+<!--开启扫描包路径，由Spring接管扫描到的类（注解注入）-->
+    <context:component-scan base-package="gzyz"></context:component-scan>
+<!--读取jdbc.properties-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!-- 配置druid数据源 -->
+    <bean name="pooledDataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          init-method="init" destroy-method="close">
+        <!-- 数据库连接基础信息 -->
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="10" />
+        <!-- 连接池最大使用连接数量 -->
+        <property name="maxActive" value="1500" />
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="10" />
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="100" />
+        <!-- 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。 -->
+        <property name="testWhileIdle" value="true" />
+        <!-- 申请连接时执行validationQuery检测连接是否有效，配置true会降低性能。 -->
+        <property name="testOnBorrow" value="false" />
+        <!-- 归还连接时执行validationQuery检测连接是否有效，配置true会降低性能 -->
+        <property name="testOnReturn" value="false" />
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="25200000" />
+
+        <!-- 对于长时间不使用的连接强制关闭 -->
+        <property name="removeAbandoned" value="true" />
+        <!-- 关闭超过30分钟的空闲连接，1800秒，也就是30分钟 -->
+        <property name="removeAbandonedTimeout" value="1800" />
+
+        <!-- 监控数据库 -->
+        <property name="filters" value="stat,wall" />
+    </bean>
+    <!-- Mybatis setting配置-->
+    <bean id="setting" class="org.apache.ibatis.session.Configuration">
+        <property name="mapUnderscoreToCamelCase" value="true"/>
+    </bean>
+    <!--  Spring 接管sqlSessionFactory  -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+<!--        表示连接数据库所需信息-->
+        <property name="dataSource" ref="pooledDataSource"/>
+<!--        它表示我们的Mapper文件存放的位置-->
+        <property name="mapperLocations" value="classpath:mappers/*.xml"/>
+<!--        它一般对应我们的实体类所在的包，这个时候会自动取对应包中不包括包名的简单类名作为包括包名的别名。-->
+        <property name="typeAliasesPackage" value="MySSMPractice_1.MyProject.pojo"/>
+<!--        表示加载其他配置信息，比如日志，分页等等-->
+        <property name="configuration" ref="setting"/>
+    </bean>
+    <!--因为Spring接管整个工程，对整个工程具有扫描权限，mybatis 定位mapper代理接口，
+        Spring将dao层的扫描事宜转交给Mybatis
+    -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="MySSMPractice_1.MyProject.dao"/>
+        <!--        名称引用  value-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+
+    <!--配置druid监控spring jdbc -->
+    <bean id="druid-stat-interceptor"
+          class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor" />
+
+    <bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+          scope="prototype">
+        <property name="patterns">
+            <list>
+                <!--需要扫描代码的包-->
+                <value>MySSMPractice_1.MyProject.controller.*</value>
+                <value>MySSMPractice_1.MyProject.service.*</value>
+            </list>
+        </property>
+    </bean>
+
+    <aop:config proxy-target-class="true">
+        <aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut"/>
+    </aop:config>
+
+    <!--监控数据库druid-->
+    <bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+        <property name="slowSqlMillis" value="3000" />
+        <!--记录sql-->
+        <property name="logSlowSql" value="true" />
+        <!--记录sql的时候可以合并-->
+        <property name="mergeSql" value="true" />
+    </bean>
+
+    <!--防火墙过滤-->
+    <bean id="wall-filter" class="com.alibaba.druid.wall.WallFilter">
+        <property name="dbType" value="mysql" />
+    </bean>
+</beans>
