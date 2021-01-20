@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gzyz.dao">
+<mapper namespace="gzyz.user_mode.dao">
 
-<!--    <insert id="insertUser" parameterType="MySSMPractice_1.MyProject.pojo.User">-->
-<!--        insert into user(uid,acc,pwd,phone,isdelete) values(#{uid},#{acc},#{pwd},#{phone},0)-->
-<!--    </insert>-->
-<!--    -->
-<!--    <select id="selectUser" resultType="MySSMPractice_1.MyProject.pojo.User">-->
-<!--        select * from user where isdelete=0-->
-<!--    </select>-->
+    <insert id="insertUser" parameterType="gzyz.user_mode.pojo.User">
+        insert into exam_user(uid,acc,pwd,phone,isdelete) values(#{uid},#{acc},#{pwd},#{phone},0)
+    </insert>
+
+    <select id="selectUser" resultType="MySSMPractice_1.MyProject.pojo.User">
+        select * from user where isdelete=0
+    </select>
 </mapper>
