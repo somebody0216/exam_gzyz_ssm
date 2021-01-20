@@ -69,9 +69,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int ModifyUserInfo(String user_id, String user_name, String user_pwd) {
+    public int ModifyUserInfo(String user_phone, String user_name, String user_pwd) {
         User u = new User();
-        u.setUserID(user_id);
+        u.setUserPhone(user_phone);
         u.setUserName(user_name);
         u.setUserPwd(user_pwd);
         int i = userDao.editMyMsg(u);

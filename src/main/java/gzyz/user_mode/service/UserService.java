@@ -21,7 +21,7 @@ public interface UserService {
     public List<User> queryMyMsg(String user_phone);
 
 
-    public int ModifyUserInfo(String user_id,String user_name,String user_pwd);
+    public int ModifyUserInfo(String user_phone,String user_name,String user_pwd);
 
 
     public int ModifyUserImg(String user_phone,String user_img);

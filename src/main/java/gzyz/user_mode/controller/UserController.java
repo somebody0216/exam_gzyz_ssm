@@ -68,7 +68,7 @@ public class UserController {
    @RequestMapping("/user/editMyMsg")
     public String editMyMsg(@RequestBody User u){
         String flag="0";
-       int i = userService.ModifyUserInfo(u.getUserID(),  u.getUserName(), u.getUserPwd());
+       int i = userService.ModifyUserInfo(u.getUserPhone(),  u.getUserName(), u.getUserPwd());
        if(i==1){
            flag="1";
        }
