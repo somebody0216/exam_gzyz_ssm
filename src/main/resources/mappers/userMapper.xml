@@ -13,11 +13,11 @@
     </select>
 
     <select id="queryMyMsg" parameterType="string" resultType="gzyz.user_mode.pojo.User">
-        select * from exam_user where user_id=#{value} and user_role=0 and isdelete=0
+        select * from exam_user where user_phone=#{value} and user_role=0 and isdelete=0
     </select>
     
     <update id="editMyMsg" parameterType="gzyz.user_mode.pojo.User">
-        update exam_user set user_img=#{userImg} and user_phone=#{userImg} and user_name=#{userImg} and user_pwd=#{userImg} where user_id=#{userId}
+        update exam_user set user_img=#{userImg} and user_phone=#{userImg} and user_name=#{userImg} and user_pwd=#{userImg} where user_id=#{userId} and user_role=0
     </update>
 
 

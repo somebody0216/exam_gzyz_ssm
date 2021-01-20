@@ -7,6 +7,9 @@ import gzyz.user_mode.util.JDK8DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -68,12 +71,34 @@ public class UserServiceImpl implements UserService {
     @Override
     public int ModifyUserInfo(String user_id, String user_img, String user_phone, String user_name, String user_pwd) {
         User u = new User();
+        u.setUserID(user_id);
         u.setUserImg(user_img);
         u.setUserPhone(user_phone);
         u.setUserName(user_name);
         u.setUserPwd(user_pwd);
         int i = userDao.editMyMsg(u);
         return i;
+    }
+
+
+    //        真实文件名  UUID_xxx.txt
+    @Override
+    public  String makeFileName(String fileName){
+        return UUID.randomUUID().toString()+"_"+fileName;
+    }
+
+
+    //        设定文件存储路径：按照时间划分
+    @Override
+    public String makePath(String savaPath){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String dataPath = sdf.format(new Date());
+        String dir = savaPath+"\\"+dataPath;
+        File file = new File(dir);
+        if (!file.exists()){
+            file.mkdirs();
+        }
+        return dir;
     }
 
 
