@@ -16,7 +16,9 @@
        http://www.springframework.org/schema/mvc
        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 <!--开启扫描包路径，由Spring接管扫描到的类（注解注入）-->
-    <context:component-scan base-package="gzyz"></context:component-scan>
+    <context:component-scan base-package="gzyz.user_mode">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 <!--读取jdbc.properties-->
     <context:property-placeholder location="classpath:jdbc.properties"/>
     <!-- 配置druid数据源 -->
@@ -74,7 +76,7 @@
         Spring将dao层的扫描事宜转交给Mybatis
     -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="MySSMPractice_1.MyProject.dao"/>
+        <property name="basePackage" value="gzyz.user_mode.dao"/>
         <!--        名称引用  value-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
