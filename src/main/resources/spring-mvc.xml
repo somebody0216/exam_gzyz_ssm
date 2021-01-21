@@ -13,7 +13,7 @@
 
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
-    <context:component-scan base-package="gzyz"></context:component-scan>
+    <context:component-scan base-package="gzyz.user_mode.controller"></context:component-scan>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/jsp/"/>
