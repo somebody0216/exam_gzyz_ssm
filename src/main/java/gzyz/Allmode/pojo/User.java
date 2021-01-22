@@ -7,20 +7,20 @@ public class User {
     private String userPhone;
     private String userName;
     private String userPwd;
+    private int isDelete;
     private String createTime;
 
     public User() {
     }
 
-
-
-    public User(int userRole, String userId, String userImg, String userPhone, String userName, String userPwd, String createTime) {
+    public User(int userRole, String userId, String userImg, String userPhone, String userName, String userPwd, int isDelete, String createTime) {
         this.userRole = userRole;
         this.userId = userId;
         this.userImg = userImg;
         this.userPhone = userPhone;
         this.userName = userName;
         this.userPwd = userPwd;
+        this.isDelete = isDelete;
         this.createTime = createTime;
     }
 
@@ -45,12 +45,20 @@ public class User {
         this.userRole = userRole;
     }
 
-    public String getUserID() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserID(String userID) {
-        this.userId = userID;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public int getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
     }
 
     public String getUserImg() {

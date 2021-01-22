@@ -30,9 +30,12 @@ public class UserController {
     @RequestMapping("/user/register")
     @ResponseBody
     public String userRegister(String user_phone,String user_pwd){
+        System.out.println(user_phone);
+        System.out.println(user_pwd);
+
         String flag="0";
         boolean b = userService.verifyRegister(user_phone);
-        if (b=false){
+        if (b==false){
             int i = userService.addUser(user_phone, user_pwd);
             if(i==1){
                 flag="1";
@@ -45,7 +48,7 @@ public class UserController {
     @RequestMapping("/user/login")
     @ResponseBody
     public String userLogin(String user_phone,String user_pwd){
-    String flag="0";
+        String flag="0";
         boolean b = userService.verifyLogin(user_phone, user_pwd);
         if(b==true){
             flag="1";
@@ -58,6 +61,7 @@ public class UserController {
     @RequestMapping("/user/queryMyMsg")
     @ResponseBody
     public User queryMyMsg(@RequestBody User u){
+        System.out.println(u);
        User user = (User)userService.queryMyMsg(u.getUserPhone());
          return user;
     }

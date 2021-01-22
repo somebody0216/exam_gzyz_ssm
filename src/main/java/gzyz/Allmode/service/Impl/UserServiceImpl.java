@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     public int addUser(String user_phone, String user_pwd) {
         User u= new User();
         u.setUserRole(0);
-        u.setUserID(UUID.randomUUID().toString());
+        u.setUserId(UUID.randomUUID().toString());
         u.setUserPhone(user_phone);
         u.setUserPwd(user_pwd);
         String a = JDK8DateUtil.LocalDateTime2String(null, null);
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         List<User> users = userDao.queryUserInfo();
         for(User u:users){
             if(u.getUserPhone()!=null&&u.getUserPwd()!=null){
-                if(u.getUserPhone().equals(user_phone)&&u.getUserPwd().equals(user_pwd)){
+                if(u.getUserPhone().equals(user_phone) && u.getUserPwd().equals(user_pwd)){
                     result=true;
                 }
             }
