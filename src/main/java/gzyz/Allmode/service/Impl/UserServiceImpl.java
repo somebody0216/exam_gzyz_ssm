@@ -1,9 +1,9 @@
-package gzyz.user_mode.service.Impl;
+package gzyz.Allmode.service.Impl;
 
-import gzyz.user_mode.dao.UserDao;
-import gzyz.user_mode.pojo.User;
-import gzyz.user_mode.service.UserService;
-import gzyz.user_mode.util.JDK8DateUtil;
+import gzyz.Allmode.dao.UserDao;
+import gzyz.Allmode.pojo.User;
+import gzyz.Allmode.service.UserService;
+import gzyz.Allmode.util.JDK8DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

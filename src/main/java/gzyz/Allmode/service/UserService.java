@@ -1,13 +1,9 @@
-package gzyz.user_mode.service;
+package gzyz.Allmode.service;
 
 
-import gzyz.user_mode.pojo.User;
+import gzyz.Allmode.pojo.User;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 public interface UserService {
 
