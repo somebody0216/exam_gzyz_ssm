@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
         u.setUserPwd(user_pwd);
         String a = JDK8DateUtil.LocalDateTime2String(null, null);
         u.setCreateTime(a);
+        System.out.println(u);
         int i = userDao.addUserInfo(u);
         return i;
     }

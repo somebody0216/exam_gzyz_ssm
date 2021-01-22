@@ -5,15 +5,15 @@
 <mapper namespace="gzyz.Allmode.dao.UserDao">
 
     <insert id="addUserInfo" parameterType="gzyz.Allmode.pojo.User">
-        insert into exam_user(user_role,user_id,user_phone,user_pwd,isdelete,create_time) values(#{userRole},#{userId},#{userPhone},#{userPwd},0,#{createTime})
+        insert into exam_user(user_role,user_id,user_phone,user_pwd,is_delete,create_time) values(#{userRole},#{userId},#{userPhone},#{userPwd},0,#{createTime})
     </insert>
 
     <select id="queryUserInfo" resultType="gzyz.Allmode.pojo.User">
-        select * from exam_user where user_role=0 and isdelete=0
+        select * from exam_user where user_role=0 and is_delete=0
     </select>
 
     <select id="queryMyMsg" parameterType="string" resultType="gzyz.Allmode.pojo.User">
-        select * from exam_user where user_phone=#{value} and user_role=0 and isdelete=0
+        select * from exam_user where user_phone=#{value} and user_role=0 and is_delete=0
     </select>
     
     <update id="editMyMsg" parameterType="gzyz.Allmode.pojo.User">
