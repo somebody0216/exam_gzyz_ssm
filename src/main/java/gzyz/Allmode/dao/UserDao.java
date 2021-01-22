@@ -1,7 +1,7 @@
-package gzyz.user_mode.dao;
+package gzyz.Allmode.dao;
 
 
-import gzyz.user_mode.pojo.User;
+import gzyz.Allmode.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

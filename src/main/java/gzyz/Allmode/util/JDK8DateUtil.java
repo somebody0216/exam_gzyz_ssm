@@ -1,4 +1,4 @@
-package gzyz.user_mode.util;
+package gzyz.Allmode.util;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

@@ -1,9 +1,8 @@
-package gzyz.user_mode.controller;
+package gzyz.Allmode.controller;
 
 
-import gzyz.user_mode.pojo.User;
-import gzyz.user_mode.service.Impl.UserServiceImpl;
-import gzyz.user_mode.service.UserService;
+import gzyz.Allmode.pojo.User;
+import gzyz.Allmode.service.UserService;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.ProgressListener;
@@ -14,18 +13,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class UserController {
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
 
 
@@ -33,11 +30,9 @@ public class UserController {
     @RequestMapping("/user/register")
     @ResponseBody
     public String userRegister(String user_phone,String user_pwd){
-        System.out.println(user_phone);
         String flag="0";
         boolean b = userService.verifyRegister(user_phone);
-        System.out.println(b);
-        if (b==false){
+        if (b=false){
             int i = userService.addUser(user_phone, user_pwd);
             if(i==1){
                 flag="1";

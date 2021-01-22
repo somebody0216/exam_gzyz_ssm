@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gzyz.Allmode.dao.QuestionDao">
+    <!--public int addQuestion(Question question)-->
+    <insert id="addQuestion" parameterType="gzyz.Allmode.pojo.Question">
+        INSERT into exam_question VALUES(#{quesId},#{quesType},#{courId},
+        #{quesTitle},#{quesSelA},#{quesSelB},#{quesSelC},#{quesSelD},#{quesAns},
+        #{quesScore},#{quesImg},#{isDelete},#{createTime},#{userId})
+    </insert>
+    <!--public int delOneQuestion(String quesId)-->
+    <update id="delOneQuestion" parameterType="string">
+        update exam_question set is_delete=1 where ques_id=#{value}
+    </update>
+    <!--public int delManyQuestion(String[] quesIds)-->
+    <update id="delManyQuestion">
+        update exam_question set is_delete=1 where ques_id in
+        <foreach collection="quesIds" open="(" close=")" separator="," item="ques_id">
+            #{ques_id}
+        </foreach>
+    </update>
+    <!--public int editQuestion(Question question)-->
+    <update id="editQuestion" parameterType="gzyz.Allmode.pojo.Question">
+        update exam_question set
+        <if test="courId!=null">
+            cour_id=#{courId},
+        </if>
+        <if test="quesTitle!=null">
+            ques_title=#{quesTitle},
+        </if>
+        <if test="quesSelA!=null">
+            ques_sel_a=#{quesSelA},
+        </if>
+        <if test="quesSelB!=null">
+            ques_sel_a=#{quesSelB},
+        </if>
+        <if test="quesSelC!=null">
+            ques_sel_a=#{quesSelC},
+        </if>
+        <if test="quesSelD!=null">
+            ques_sel_a=#{quesSelD},
+        </if>
+        <if test="quesAns!=null">
+            ques_ans=#{quesAns},
+        </if>
+        <if test="quesScore!=0">
+            ques_score=#{quesScore},
+        </if>
+        <if test="quesImg!=null">
+            ques_img=#{quesImg}
+        </if>
+        where ques_id=#{quesId}
+    </update>
+    <!--public List<Question> queryQuestions(String userId)-->
+    <select id="queryQuestions" parameterType="string" resultType="gzyz.Allmode.pojo.Question">
+        select * from exam_question where user_id=#{value} and is_delete=0
+    </select>
+    
+    <!-- public List<Question> queryQuestionsByCondition(@Param("time1") String createTime1,
+            @Param("time2") String createTime2,@Param("type") int ques_type,
+            @Param("courId") String cour_id,@Param("title") String ques_title)-->
+    <select id="queryQuestionsByCondition" resultType="gzyz.Allmode.pojo.Question">
+        select * from exam_question
+        <where>
+            <if test="time1!=null">
+                create_time > #{time1}
+            </if>
+            <if test="time2!=null">
+                and create_time &lt; #{time2}
+            </if>
+            <if test="type!=null">
+                and ques_type=#{type}
+            </if>
+            <if test="courId!=null">
+                and cour_id=#{courId}
+            </if>
+            <if test="title!=null">
+                and ques_title like concat('%',#{title},'%')
+            </if>
+            and is_delete=0
+        </where>
+    </select>
+</mapper>

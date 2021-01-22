@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gzyz.Allmode.dao.CourseDao">
+    <insert id="addCourse" parameterType="gzyz.Allmode.pojo.Course">
+        INSERT into exam_course VALUES(#{courId},#{courName},#{isDelete},#{createTime},#{userId})
+    </insert>
+    <select id="queryCourse" resultType="gzyz.Allmode.pojo.Course" parameterType="string">
+        select * from exam_course where user_id=#{value} and is_delete=0
+    </select>
+    <!--public int delCourseByName(@Param("name") String name, @Param("userId") String userId);-->
+    <update id="delCourseByName">
+        update exam_course set is_delete=1 where cour_id=#{courId}
+    </update>
+    <!--public int editCourseByName(@Param("courName") String courName,
+                                @Param("courId") String courId);-->
+    <update id="editCourseByName">
+        update exam_course set cour_name=#{courName} where cour_id=#{courId}
+    </update>
+    <!--public List<Course> queryOnlyCourse(String userId);-->
+    <select id="queryOnlyCourse" resultType="gzyz.Allmode.pojo.Course" parameterType="string">
+        select * from exam_course where user_id=#{value} and is_delete=0
+    </select>
+    <!--public Course queryCourseById(String courId);-->
+    <select id="queryCourseById" parameterType="string" resultType="gzyz.Allmode.pojo.Course">
+        select * from exam_course where cour_id=#{value}
+    </select>
+</mapper>

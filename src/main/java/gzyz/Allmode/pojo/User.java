@@ -1,4 +1,4 @@
-package gzyz.user_mode.pojo;
+package gzyz.Allmode.pojo;
 
 public class User {
     private int userRole;
