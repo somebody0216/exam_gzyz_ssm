@@ -26,13 +26,16 @@ public class UserServiceImpl implements UserService {
     public boolean verifyRegister(String user_phone) {
         boolean result=false;
         List<User> users = userDao.queryUserInfo();
-        for(User u:users){
-            if(u.getUserPhone()!=null){
-                if(user_phone.equals(u.getUserPhone())){
-                    result=true;
+        if (user_phone!=null){
+            for(User u:users){
+                if(u.getUserPhone()!=null){
+                    if(user_phone.equals(u.getUserPhone())){
+                        result=true;
+                    }
                 }
             }
         }
+
         return result;
     }
 

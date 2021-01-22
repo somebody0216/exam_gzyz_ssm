@@ -2,6 +2,7 @@ package gzyz.user_mode.controller;
 
 
 import gzyz.user_mode.pojo.User;
+import gzyz.user_mode.service.Impl.UserServiceImpl;
 import gzyz.user_mode.service.UserService;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -24,7 +25,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
 
 
@@ -32,9 +33,11 @@ public class UserController {
     @RequestMapping("/user/register")
     @ResponseBody
     public String userRegister(String user_phone,String user_pwd){
+        System.out.println(user_phone);
         String flag="0";
         boolean b = userService.verifyRegister(user_phone);
-        if (b=false){
+        System.out.println(b);
+        if (b==false){
             int i = userService.addUser(user_phone, user_pwd);
             if(i==1){
                 flag="1";
