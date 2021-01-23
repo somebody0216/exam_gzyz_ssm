@@ -54,12 +54,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean verifyLogin(String user_phone, String user_pwd) {
+    public boolean verifyLogin(String userPhone, String userPwd) {
         boolean result=false;
         List<User> users = userDao.queryUserInfo();
         for(User u:users){
             if(u.getUserPhone()!=null&&u.getUserPwd()!=null){
-                if(u.getUserPhone().equals(user_phone) && u.getUserPwd().equals(user_pwd)){
+                if(u.getUserPhone().equals(userPhone) && u.getUserPwd().equals(userPwd)){
                     result=true;
                 }
             }

@@ -47,9 +47,9 @@ public class UserController {
 //    用户登录
     @RequestMapping("/user/login")
     @ResponseBody
-    public String userLogin(String user_phone,String user_pwd){
+    public String userLogin(String userPhone,String userPwd){
         String flag="0";
-        boolean b = userService.verifyLogin(user_phone, user_pwd);
+        boolean b = userService.verifyLogin(userPhone, userPwd);
         if(b==true){
             flag="1";
         }
