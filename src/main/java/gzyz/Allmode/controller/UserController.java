@@ -62,12 +62,13 @@ public class UserController {
     @ResponseBody
     public User queryMyMsg(@RequestBody User u){
         System.out.println(u);
-       User user = (User)userService.queryMyMsg(u.getUserPhone());
+       User user = (User)userService.queryMyMsg(u.getUserPhone()).get(0);
          return user;
     }
 
 //    用户修改信息
    @RequestMapping("/user/editMyMsg")
+   @ResponseBody
     public String editMyMsg(@RequestBody User u){
         String flag="0";
        int i = userService.ModifyUserInfo(u.getUserPhone(),  u.getUserName(), u.getUserPwd());
