@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gzyz.Allmode.dao.PaperClassifyDao">
+
+<select id="queryAllClassify" resultType="gzyz.Allmode.pojo.PaperClassify" parameterType="string">
+    select * from exam_paperclassify where userId=#{value};
+</select>
+
+<insert id="addClassify" parameterType="gzyz.Allmode.pojo.PaperClassify">
+    insert into exam_PaperClassify(pc_id,pc_name,is_delete,create_time,user_id) values (#{pcId},#{pcName},0,#{createTime},#{userId}) where user_id=#{userId};
+</insert>
+
+<update id="delClassifyById"  parameterType="string">
+    update set exam_paperclassify where pc_id=#{value};
+</update>
+
+<select id="queryOneClassify" parameterType="string" resultType="gzyz.Allmode.pojo.PaperClassify">
+    select * from exam_paperclassify where pc_id=#{value};
+</select>
+
+<update id="editClassifyById" parameterType="gzyz.Allmode.pojo.PaperClassify">
+    update exam_paperclassify set pc_name=#{pcName} where pc_id=#{pcId};
+</update>
+
+
+</mapper>
