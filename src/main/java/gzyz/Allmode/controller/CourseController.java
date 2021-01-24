@@ -33,7 +33,7 @@ public class CourseController {
      */
     @RequestMapping("/question/type/addCourse")
     @ResponseBody
-    public boolean addCourse(@RequestBody Course course){
+    public boolean addCourse( Course course){
         System.out.println(course);
         return courseService.addCourse(course);
     }
@@ -79,11 +79,12 @@ public class CourseController {
      */
     @RequestMapping("/question/type/queryCourseById")
     @ResponseBody
-    public String queryCourseById(@RequestBody Course course){
+    public String queryCourseById( Course course){
         System.out.println(course);
         Course course2 = courseService.queryCourseById(course.getCourId());
         if (course!=null){
             return course2.getCourName();
+//            return "haha";
         }
         return "";
     }

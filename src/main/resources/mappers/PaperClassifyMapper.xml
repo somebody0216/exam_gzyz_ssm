@@ -5,7 +5,7 @@
 <mapper namespace="gzyz.Allmode.dao.PaperClassifyDao">
 
 <select id="queryAllClassify" resultType="gzyz.Allmode.pojo.PaperClassify" parameterType="string">
-    select * from exam_paperclassify where userId=#{value};
+    select * from exam_paperclassify where user_id=#{value};
 </select>
 
 <insert id="addClassify" parameterType="gzyz.Allmode.pojo.PaperClassify">

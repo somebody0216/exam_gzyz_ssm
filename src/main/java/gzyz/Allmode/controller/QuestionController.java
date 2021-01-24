@@ -40,14 +40,14 @@ public class QuestionController {
 
     /**
      * 删除一个题目(OK)
-     * @param question quesId
+     * @param  quesId
      * @return
      */
-    @RequestMapping("/question/ques/delOneQuestion")
+    @RequestMapping("/question/ques/delOneQuestion/{quesId}")
     @ResponseBody
-    public boolean delOneQuestion(@RequestBody Question question){
-        System.out.println(question.getQuesId());
-        return questionService.delOneQuestion(question.getQuesId());
+    public boolean delOneQuestion(@PathVariable("quesId") String quesId){
+//        System.out.println(question.getQuesId());
+        return questionService.delOneQuestion(quesId);
     }
 
     /**
@@ -55,9 +55,9 @@ public class QuestionController {
      * @param quesIds
      * @return
      */
-    @RequestMapping("/question/ques/delManyQuestion/{quesIds}")
+    @RequestMapping("/quesion/ques/delManyQuestion")
     @ResponseBody
-    public boolean delManyQuestion(@PathVariable("quesIds") String quesIds){
+    public boolean delManyQuestion( String quesIds){
         String[] quesIdsArr=quesIds.split(",");
         for (int i=0;i<quesIdsArr.length;i++){
             System.out.println(quesIdsArr[i]);

@@ -30,7 +30,8 @@ public class CourseServiceImpl implements CourseService {
     public boolean addCourse(Course course) {
         List<Course> courseList = queryCourse(course.getUserId());
         for (Course c : courseList) {
-            if (course.getCourName().equals(course.getCourName())){//科目名重复，添加失败
+            System.out.println(c);
+            if (c.getCourName().equals(course.getCourName())){//科目名重复，添加失败
                 return false;
             }
         }

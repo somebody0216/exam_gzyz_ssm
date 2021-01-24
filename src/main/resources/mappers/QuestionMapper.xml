@@ -26,6 +26,9 @@
         <if test="courId!=null">
             cour_id=#{courId},
         </if>
+        <if test="quesType!=null">
+            ques_type=#{quesType},
+        </if>
         <if test="quesTitle!=null">
             ques_title=#{quesTitle},
         </if>
@@ -33,13 +36,13 @@
             ques_sel_a=#{quesSelA},
         </if>
         <if test="quesSelB!=null">
-            ques_sel_a=#{quesSelB},
+            ques_sel_b=#{quesSelB},
         </if>
         <if test="quesSelC!=null">
-            ques_sel_a=#{quesSelC},
+            ques_sel_c=#{quesSelC},
         </if>
         <if test="quesSelD!=null">
-            ques_sel_a=#{quesSelD},
+            ques_sel_d=#{quesSelD},
         </if>
         <if test="quesAns!=null">
             ques_ans=#{quesAns},
