@@ -32,7 +32,7 @@ public class UserController {
     public String userRegister(String user_phone,String user_pwd){
         System.out.println(user_phone);
         System.out.println(user_pwd);
-
+        System.out.println("11111111");
         String flag="0";
         boolean b = userService.verifyRegister(user_phone);
         if (b==false){
@@ -41,15 +41,18 @@ public class UserController {
                 flag="1";
             }
         }
+        System.out.println(flag);
         return flag;
     }
 
 //    用户登录
     @RequestMapping("/user/login")
     @ResponseBody
-    public String userLogin(String userPhone,String userPwd){
+    public String userLogin(String user_phone,String user_pwd){
+        System.out.println(user_phone);
+        System.out.println(user_pwd);
         String flag="0";
-        boolean b = userService.verifyLogin(userPhone, userPwd);
+        boolean b = userService.verifyLogin(user_phone, user_pwd);
         if(b==true){
             flag="1";
         }
