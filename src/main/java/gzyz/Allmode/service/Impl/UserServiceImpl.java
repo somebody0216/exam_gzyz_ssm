@@ -26,13 +26,16 @@ public class UserServiceImpl implements UserService {
     public boolean verifyRegister(String user_phone) {
         boolean result=false;
         List<User> users = userDao.queryUserInfo();
-        for(User u:users){
-            if(u.getUserPhone()!=null){
-                if(user_phone.equals(u.getUserPhone())){
-                    result=true;
+        if (user_phone!=null){
+            for(User u:users){
+                if(u.getUserPhone()!=null){
+                    if(user_phone.equals(u.getUserPhone())){
+                        result=true;
+                    }
                 }
             }
         }
+
         return result;
     }
 
@@ -45,17 +48,18 @@ public class UserServiceImpl implements UserService {
         u.setUserPwd(user_pwd);
         String a = JDK8DateUtil.LocalDateTime2String(null, null);
         u.setCreateTime(a);
+        System.out.println(u);
         int i = userDao.addUserInfo(u);
         return i;
     }
 
     @Override
-    public boolean verifyLogin(String user_phone, String user_pwd) {
+    public boolean verifyLogin(String userPhone, String userPwd) {
         boolean result=false;
         List<User> users = userDao.queryUserInfo();
         for(User u:users){
             if(u.getUserPhone()!=null&&u.getUserPwd()!=null){
-                if(u.getUserPhone().equals(user_phone) && u.getUserPwd().equals(user_pwd)){
+                if(u.getUserPhone().equals(userPhone) && u.getUserPwd().equals(userPwd)){
                     result=true;
                 }
             }

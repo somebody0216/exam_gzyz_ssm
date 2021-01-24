@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gzyz.Allmode.dao.PaperDao">
+
+    <select id="queryAllPapers" resultType="gzyz.Allmode.pojo.Paper" parameterType="string">
+    select * from exam_paper where user_id=#{value};
+    </select>
+
+    <insert id="addPaper" parameterType="gzyz.Allmode.pojo.Paper" >
+    insert into exam_paper(p_title,pc_id,p_tol_score,p_start_time,p_end_time,p_free,p_rand_num,p_status) values (#{pTitle},#{pcId},#{pTolScore},#{pStartTime},#{pEndTime},#{pFree},#{pRandNum},#{pStatus})
+    where user_id=#{userId};
+    </insert>
+
+    <update id="delOnePaper" parameterType="string">
+    update exam_paper set is_delete=1 where p_id=#{value};
+    </update>
+
+    <update id="delManyPaper">
+    update exam_paper set is_delete=1 where p_id in
+    <foreach collection="pIds" open="(" close=")" separator="," item="p_id">
+        #{p_id}
+    </foreach>
+    </update>
+    
+    <select id="queryPaperBypid" parameterType="string" resultType="gzyz.Allmode.pojo.Paper">
+    select * from exam_paper where p_id=#{value};
+    </select>
+
+
+    <update id="editPaperById" parameterType="gzyz.Allmode.pojo.Paper">
+    update  exam_paper set p_title=#{pTitle} and pc_id=#{pcId} and p_start_time=#{pStartTime} and
+    p_end_time=#{pEndTime} and p_free=#{pFree} and p_status=#{pStatus} where p_id=#{pId};
+    </update>
+
+    
+    <select id="queryAllQuesByPid" parameterType="string" resultType="gzyz.Allmode.pojo.Question">
+        select q.ques_id quesId,q.ques_type quesType,q.cour_id courId,q.ques_title quesTitle,
+        q.ques_sel_a quesSelA,q.ques_sel_b quesSelB,q.ques_sel_c quesSelC,q.ques_sel_d quesSelD,
+        q.ques_ans quesAns,q.ques_score quesScore,q.ques_img quesImg,q.create_time createTime
+         from exam_question q left join exam_papques pq on q.q_id=pq.q_id where pq.p_id=#{value};
+    </select>
+
+    <insert id="addOneQuestion" parameterType="gzyz.Allmode.pojo.PapQues">
+        insert into exam_papques(pq_id,p_id,ques_id,is_delete,create_time) values(pqId,pId,quesId,0,createTime)
+    </insert>
+    
+    <insert id="addManyQuestion">
+        insert into exam_papques(p_id,ques_id) values
+        <foreach collection="list" item="pq" separator=",">
+            (#{pq.pId},#{pq.quesId})
+        </foreach>
+    </insert>
+    
+    <update id="delQuestion">
+        update exam_papques set is_delete=1 where p_id=#{pId} and ques_id in
+        <foreach collection="quesIds" item="quesId" open="(" close=")" separator=",">
+            #{quesId}
+        </foreach>
+    </update>
+    
+</mapper>

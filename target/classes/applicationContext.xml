@@ -78,10 +78,25 @@
 <!--        表示加载其他配置信息，比如日志，分页等等-->
         <property name="configuration" ref="setting"/>
 
-        <!--配置分页插件-->
+<!--        &lt;!&ndash;配置分页插件&ndash;&gt;-->
+<!--        <property name="plugins">-->
+<!--            <array>-->
+<!--                <bean class="com.github.pagehelper.PageInterceptor"></bean>-->
+<!--            </array>-->
+<!--        </property>-->
+        <!--配置PageHelper-->
         <property name="plugins">
             <array>
-                <bean class="com.github.pagehelper.PageInterceptor"></bean>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            offsetAsPageNum=true
+                            rowBoundsWithCount=true
+                            pageSizeZero=true
+                            reasonable=true
+                        </value>
+                    </property>
+                </bean>
             </array>
         </property>
     </bean>

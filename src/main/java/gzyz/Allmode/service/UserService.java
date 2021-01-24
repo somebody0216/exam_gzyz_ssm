@@ -11,7 +11,7 @@ public interface UserService {
 
     public int addUser(String user_phone, String user_pwd);
 
-    public boolean verifyLogin(String user_phone,String user_pwd);
+    public boolean verifyLogin(String userPhone,String userPwd);
 
 
     public List<User> queryMyMsg(String user_phone);
