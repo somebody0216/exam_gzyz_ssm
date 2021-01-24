@@ -9,7 +9,8 @@
 </select>
 
 <insert id="addClassify" parameterType="gzyz.Allmode.pojo.PaperClassify">
-    insert into exam_PaperClassify(pc_id,pc_name,is_delete,create_time,user_id) values (#{pcId},#{pcName},0,#{createTime},#{userId}) where user_id=#{userId};
+    <!--insert into exam_PaperClassify(pc_id,pc_name,is_delete,create_time,user_id) values (#{pcId},#{pcName},0,#{createTime},#{userId}) where user_id=#{userId};-->
+    insert into exam_paperClassify values (#{pcId},#{pcName},#{isDelete},#{createTime},#{userId});
 </insert>
 
 <update id="delClassifyById"  parameterType="string">

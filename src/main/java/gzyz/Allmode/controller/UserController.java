@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -45,7 +47,7 @@ public class UserController {
     }
 
 //    用户登录
-    @RequestMapping("/user/login")
+    /*@RequestMapping("/user/login")
     @ResponseBody
     public String userLogin(String userPhone,String userPwd){
         String flag="0";
@@ -54,8 +56,20 @@ public class UserController {
             flag="1";
         }
         return flag;
+    }*/
+    @RequestMapping("/user/login")
+    @ResponseBody
+    public Map<String,String> userLogin(String userPhone, String userPwd){
+        User user = userService.verifyLogin(userPhone, userPwd);
+        HashMap<String,String> map=new HashMap<String,String>();
+        if (user==null){
+            map.put("flag","0");
+        }else {
+            map.put("flag","1");
+            map.put("userId",user.getUserId());
+        }
+        return map;
     }
-
 
 //用户根据手机号查看用户信息
     @RequestMapping("/user/queryMyMsg")
