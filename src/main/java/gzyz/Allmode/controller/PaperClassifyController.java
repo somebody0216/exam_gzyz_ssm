@@ -6,6 +6,7 @@ import gzyz.Allmode.service.PaperClassifyService;
 import gzyz.Allmode.util.JDK8DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,9 +20,15 @@ public class PaperClassifyController {
     @Autowired
     private PaperClassifyService paperClassifyService;
 
-    @RequestMapping("/paper/queryAllClassify")
+    /*@RequestMapping("/paper/queryAllClassify")
     public List<PaperClassify> queryAllClassify(@RequestBody PaperClassify paperClassify){
         return paperClassifyService.queryAllClassify(paperClassify.getUserId());
+    }*/
+
+    @RequestMapping("/paper/queryAllClassify/{userId}")
+    @ResponseBody
+    public List<PaperClassify> queryAllClassify(@PathVariable String userId){
+        return paperClassifyService.queryAllClassify(userId);
     }
 
     @RequestMapping("/paper/addClassify")
@@ -32,6 +39,7 @@ public class PaperClassifyController {
     pc.setPcName(paperClassify.getPcName());
     pc.setCreateTime(JDK8DateUtil.LocalDateTime2String(null,null));
     pc.setUserId(paperClassify.getUserId());
+    pc.setIsDelete(0);
     return paperClassifyService.addClassify(pc);
     }
 
