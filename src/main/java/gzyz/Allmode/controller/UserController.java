@@ -63,7 +63,11 @@ public class UserController {
     @RequestMapping("/user/login")
     @ResponseBody
     public Map<String,String> userLogin(String userPhone, String userPwd){
-        User user = userService.verifyLogin(userPhone, userPwd);
+        System.out.println(userPhone);
+        System.out.println(userPwd);
+
+        User user =  userService.verifyLogin(userPhone, userPwd);
+        System.out.println(user);
         HashMap<String,String> map=new HashMap<String,String>();
         if (user==null){
             map.put("flag","0");

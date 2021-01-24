@@ -53,7 +53,6 @@ public class UserServiceImpl implements UserService {
         return i;
     }
 
-    @Override
     /*public boolean verifyLogin(String userPhone, String userPwd) {
         boolean result=false;
         List<User> users = userDao.queryUserInfo();
@@ -66,10 +65,13 @@ public class UserServiceImpl implements UserService {
         }
         return result;
     }*/
+    @Override
     public User verifyLogin(String userPhone, String userPwd) {
         User user=null;
         List<User> users = userDao.queryUserInfo();
+
         for(User u:users){
+            System.out.println(u);
             if(u.getUserPhone()!=null&&u.getUserPwd()!=null){
                 if(u.getUserPhone().equals(userPhone) && u.getUserPwd().equals(userPwd)){
                     user=u;
@@ -77,6 +79,7 @@ public class UserServiceImpl implements UserService {
                 }
             }
         }
+        System.out.println(user);
         return user;
     }
 
