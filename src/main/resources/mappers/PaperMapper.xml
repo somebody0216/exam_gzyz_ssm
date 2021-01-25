@@ -5,12 +5,17 @@
 <mapper namespace="gzyz.Allmode.dao.PaperDao">
 
     <select id="queryAllPapers" resultType="gzyz.Allmode.pojo.Paper" parameterType="string">
-    select * from exam_paper where user_id=#{value};
+        <!--select * from exam_paper where user_id=#{value};-->
+        select * from exam_paper where user_id=#{value} and is_delete=0
     </select>
 
-    <insert id="addPaper" parameterType="gzyz.Allmode.pojo.Paper" >
-    insert into exam_paper(p_title,pc_id,p_tol_score,p_start_time,p_end_time,p_free,p_rand_num,p_status) values (#{pTitle},#{pcId},#{pTolScore},#{pStartTime},#{pEndTime},#{pFree},#{pRandNum},#{pStatus})
-    where user_id=#{userId};
+    <insert id="addPaper" parameterType="gzyz.Allmode.pojo.Paper">
+        <!--insert into exam_paper(p_title,pc_id,p_tol_score,p_start_time,p_end_time,p_free,p_rand_num,p_status)
+        values (#{pTitle},#{pcId},#{pTolScore},#{pStartTime},#{pEndTime},#{pFree},#{pRandNum},#{pStatus})
+        where user_id=#{userId};-->
+        insert into exam_paper
+        values
+        (#{pId},#{pTitle},#{pcId},#{pTolScore},#{pStartTime},#{pEndTime},#{pFree},#{pStatus},#{pRandNum},#{isDelete},#{createTime},#{userId});
     </insert>
 
     <update id="delOnePaper" parameterType="string">
@@ -18,12 +23,12 @@
     </update>
 
     <update id="delManyPaper">
-    update exam_paper set is_delete=1 where p_id in
-    <foreach collection="pIds" open="(" close=")" separator="," item="p_id">
-        #{p_id}
-    </foreach>
+        update exam_paper set is_delete=1 where p_id in
+        <foreach collection="pIds" open="(" close=")" separator="," item="p_id">
+            #{p_id}
+        </foreach>
     </update>
-    
+
     <select id="queryPaperBypid" parameterType="string" resultType="gzyz.Allmode.pojo.Paper">
     select * from exam_paper where p_id=#{value};
     </select>
@@ -34,7 +39,7 @@
     p_end_time=#{pEndTime} and p_free=#{pFree} and p_status=#{pStatus} where p_id=#{pId};
     </update>
 
-    
+
     <select id="queryAllQuesByPid" parameterType="string" resultType="gzyz.Allmode.pojo.Question">
         select q.ques_id quesId,q.ques_type quesType,q.cour_id courId,q.ques_title quesTitle,
         q.ques_sel_a quesSelA,q.ques_sel_b quesSelB,q.ques_sel_c quesSelC,q.ques_sel_d quesSelD,
@@ -45,19 +50,19 @@
     <insert id="addOneQuestion" parameterType="gzyz.Allmode.pojo.PapQues">
         insert into exam_papques(pq_id,p_id,ques_id,is_delete,create_time) values(pqId,pId,quesId,0,createTime)
     </insert>
-    
+
     <insert id="addManyQuestion">
         insert into exam_papques(p_id,ques_id) values
         <foreach collection="list" item="pq" separator=",">
             (#{pq.pId},#{pq.quesId})
         </foreach>
     </insert>
-    
+
     <update id="delQuestion">
         update exam_papques set is_delete=1 where p_id=#{pId} and ques_id in
         <foreach collection="quesIds" item="quesId" open="(" close=")" separator=",">
             #{quesId}
         </foreach>
     </update>
-    
+
 </mapper>
