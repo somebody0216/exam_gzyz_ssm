@@ -8,21 +8,39 @@ import gzyz.Allmode.service.PaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class PaperServiceImpl implements PaperService {
     @Autowired
     private PaperDao paperDao;
+    SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 
     @Override
     public List<Paper> queryAllPapers(String userId) {
         return paperDao.queryAllPapers(userId);
     }
 
+    /*@Override
+    public boolean addPaper(Paper paper) {
+        return paperDao.addPaper(paper)==1;
+    }*/
     @Override
     public boolean addPaper(Paper paper) {
+        String pId=UUID.randomUUID().toString();
+        String[] strings = pId.split("-");
+        String randNum=strings[0]+"-"+strings[1]+"-"+paper.getpTitle().hashCode();
+
+        paper.setpId(pId);
+        paper.setpStatus(0);
+        paper.setpRandNum(randNum);
+        paper.setIsDelete(0);
+        paper.setCreateTime(dateFormat.format(new Date()));
         return paperDao.addPaper(paper)==1;
     }
 

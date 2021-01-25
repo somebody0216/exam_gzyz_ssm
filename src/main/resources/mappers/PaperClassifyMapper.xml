@@ -5,7 +5,8 @@
 <mapper namespace="gzyz.Allmode.dao.PaperClassifyDao">
 
 <select id="queryAllClassify" resultType="gzyz.Allmode.pojo.PaperClassify" parameterType="string">
-    select * from exam_paperclassify where user_id=#{value};
+    <!--select * from exam_paperclassify where userId=#{value};-->
+    select * from exam_paperclassify where user_id=#{value} and is_delete=0;
 </select>
 
 <insert id="addClassify" parameterType="gzyz.Allmode.pojo.PaperClassify">
@@ -13,17 +14,18 @@
     insert into exam_paperClassify values (#{pcId},#{pcName},#{isDelete},#{createTime},#{userId});
 </insert>
 
-<update id="delClassifyById"  parameterType="string">
-    update set exam_paperclassify where pc_id=#{value};
-</update>
+    <update id="delClassifyById"  parameterType="string">
+        <!--update set exam_paperclassify where pc_id=#{value};-->
+        update exam_paperclassify set is_delete=1  where pc_id=#{value};
+    </update>
 
-<select id="queryOneClassify" parameterType="string" resultType="gzyz.Allmode.pojo.PaperClassify">
-    select * from exam_paperclassify where pc_id=#{value};
-</select>
+    <select id="queryOneClassify" parameterType="string" resultType="gzyz.Allmode.pojo.PaperClassify">
+        select * from exam_paperclassify where pc_id=#{value};
+    </select>
 
-<update id="editClassifyById" parameterType="gzyz.Allmode.pojo.PaperClassify">
-    update exam_paperclassify set pc_name=#{pcName} where pc_id=#{pcId};
-</update>
+    <update id="editClassifyById" parameterType="gzyz.Allmode.pojo.PaperClassify">
+        update exam_paperclassify set pc_name=#{pcName} where pc_id=#{pcId};
+    </update>
 
 
-</mapper>
+    </mapper>

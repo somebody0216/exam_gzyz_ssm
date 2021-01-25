@@ -1,6 +1,9 @@
 package gzyz.Allmode.controller;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import gzyz.Allmode.pojo.PageUtils;
 import gzyz.Allmode.pojo.PapQues;
 import gzyz.Allmode.pojo.Paper;
 import gzyz.Allmode.pojo.Question;
@@ -19,10 +22,23 @@ public class PaperController {
     @Autowired
     private PaperService paperService;
 
-    @RequestMapping("/paper/queryAllPapers")
+    /*@RequestMapping("/paper/queryAllPapers")
     @ResponseBody
     public List<Paper> paperQueryAllPapers(String userId){
         return paperService.queryAllPapers(userId);
+    }*/
+    @RequestMapping("/paper/queryAllPapers")
+    @ResponseBody
+    public PageUtils paperQueryAllPapers(@RequestBody Map<String,String> map){
+        Set<String> keys = map.keySet();
+        for (String key : keys) {
+            System.out.println(key+"  "+map.get(key));
+        }
+        /*必须在Service前*/
+        PageHelper.offsetPage(Integer.parseInt(map.get("offSet")),Integer.parseInt(map.get("pageNumber")));
+        List<Paper> paperList = paperService.queryAllPapers(map.get("userId"));
+        PageInfo<Paper> pageInfo=new PageInfo<Paper>(paperList);
+        return new PageUtils(new Long(pageInfo.getTotal()).intValue(),pageInfo.getList());
     }
 
     @RequestMapping("/paper/addPaper")
