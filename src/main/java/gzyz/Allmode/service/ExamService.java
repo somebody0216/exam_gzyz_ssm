@@ -12,6 +12,6 @@ import java.util.List;
  */
 public interface ExamService {
     public Student addStudent(Student student);
-    public boolean addStuPaperInfo(StuPaperInfo stuPaperInfo);
+    public boolean addStuPaperInfo(List<StuPaperInfo> stuPaperInfos);
     public List<PaperStuGrade> queryGrageBypid(String pid);
 }

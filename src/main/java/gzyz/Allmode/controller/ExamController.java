@@ -1,6 +1,5 @@
 package gzyz.Allmode.controller;
 
-import gzyz.Allmode.dao.ExamDao;
 import gzyz.Allmode.pojo.Paper;
 import gzyz.Allmode.pojo.PaperStuGrade;
 import gzyz.Allmode.pojo.StuPaperInfo;
@@ -62,13 +61,13 @@ public class ExamController {
 
     /**
      *保存学生试卷信息
-     * @param stuPaperInfo
+     * @param  list
      * @return
      */
     @RequestMapping("/exam/addStuPaperInfo")
     @ResponseBody
-    public boolean addStuPaperInfo(@RequestBody StuPaperInfo stuPaperInfo){
-        return examService.addStuPaperInfo(stuPaperInfo);
+    public boolean addStuPaperInfo(@RequestBody List<StuPaperInfo> list){
+        return examService.addStuPaperInfo(list);
     }
 
     /**
@@ -78,7 +77,7 @@ public class ExamController {
      */
     @RequestMapping("/exam/queryGrageBypid")
     @ResponseBody
-    public List<PaperStuGrade> queryGrageBypid(String pId){
+    public List<PaperStuGrade> queryGrageBypid(@RequestBody String pId){
         return  examService.queryGrageBypid(pId);
     }
 }

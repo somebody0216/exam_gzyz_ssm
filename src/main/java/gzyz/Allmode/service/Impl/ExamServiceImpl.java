@@ -36,11 +36,17 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public boolean addStuPaperInfo(StuPaperInfo stuPaperInfo) {
-        stuPaperInfo.setSpiId(UUID.randomUUID().toString());
-        stuPaperInfo.setCreateTime(dateFormat.format(new Date()));
-        stuPaperInfo.setIsDelete(0);
-        return examDao.addStuPaperInfo(stuPaperInfo)==1;
+    public boolean addStuPaperInfo(List<StuPaperInfo> stuPaperInfos) {
+        for (StuPaperInfo stuPaperInfo : stuPaperInfos) {
+            stuPaperInfo.setSpiId(UUID.randomUUID().toString());
+            stuPaperInfo.setCreateTime(dateFormat.format(new Date()));
+            stuPaperInfo.setIsDelete(0);
+            if (examDao.addStuPaperInfo(stuPaperInfo)!=1){
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override
