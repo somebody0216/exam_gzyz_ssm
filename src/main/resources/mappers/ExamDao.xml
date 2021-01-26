@@ -30,4 +30,17 @@
     <select id="queryAllStudent" parameterType="string" resultType="string">
         select distinct stu_id from exam_stupaperinfo where p_id=#{value};
     </select>
+
+
+    <!--public void adPaperStuGrade(PaperStuGrade paperStuGrade);-->
+    <insert id="addPaperStuGrade" parameterType="gzyz.Allmode.pojo.PaperStuGrade">
+        insert into exam_paperstugrade VALUES(#{psgId},#{pId},#{stuId},#{psgGrade},#{isDelete},#{createTime});
+    </insert>
+
+    <!--public List<Map<String,Object>> queryAllGradeMsg(String pId);-->
+    <select id="queryAllGradeMsg" parameterType="string" resultType="map">
+        select exam_paperstugrade.*,exam_student.stu_name,exam_student.stu_phone from exam_paperstugrade
+        LEFT join exam_student on exam_paperstugrade.stu_id=exam_student.stu_id
+        where exam_paperstugrade.p_id=#{value}
+    </select>
 </mapper>

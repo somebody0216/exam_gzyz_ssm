@@ -110,7 +110,14 @@ public class PaperServiceImpl implements PaperService {
 
     @Override
     public boolean delQuestion(String pId, String[] quesIds) {
-        return paperDao.delQuestion(pId,quesIds)==quesIds.length;
+        if (paperDao.delQuestion(pId,quesIds)>0){
+            double score = paperDao.querySumScore(pId);
+            Paper paper = paperDao.queryPaperBypid(pId);
+            paper.setpTolScore(score);//更改试卷总分
+            paperDao.editPaperById(paper);
+            return true;
+        }
+        return false;
     }
 
     @Override

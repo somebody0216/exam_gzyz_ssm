@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.mysql.cj.x.protobuf.MysqlxConnection;
 import gzyz.Allmode.pojo.Course;
 import gzyz.Allmode.pojo.PageUtils;
+import gzyz.Allmode.pojo.User;
 import gzyz.Allmode.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,6 +55,18 @@ public class CourseController {
 
         PageInfo<Course> pageInfo=new PageInfo<Course>(allCourse);
         return new PageUtils(new Long(pageInfo.getTotal()).intValue(),pageInfo.getList());
+    }
+
+    /**
+     * 查询科目（不分页）
+     * @param user
+     * @return
+     */
+    @RequestMapping("/question/type/queryCourse2")
+    @ResponseBody
+    public List<Course> queryCourse2(@RequestBody User user){
+        System.out.println(user.getUserId());
+        return courseService.queryCourse(user.getUserId());
     }
 
     /**

@@ -1,5 +1,6 @@
 package gzyz.Allmode.dao;
 
+import gzyz.Allmode.pojo.Course;
 import gzyz.Allmode.pojo.Question;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
