@@ -33,12 +33,9 @@ public class PaperServiceImpl implements PaperService {
     @Override
     public boolean addPaper(Paper paper) {
         String pId=UUID.randomUUID().toString();
-        String[] strings = pId.split("-");
-        String randNum=strings[0]+"-"+strings[1]+"-"+paper.getpTitle().hashCode();
-
         paper.setpId(pId);
         paper.setpStatus(0);
-        paper.setpRandNum(randNum);
+        paper.setpRandNum(pId);
         paper.setIsDelete(0);
         paper.setCreateTime(dateFormat.format(new Date()));
         return paperDao.addPaper(paper)==1;
@@ -75,12 +72,34 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
+    public boolean addManyQuestion(String userId,String pId, String[] quesIds) {
+        for (String quesId : quesIds) {
+            PapQues papQues=new PapQues();
+            papQues.setCreateTime(dateFormat.format(new Date()));
+            papQues.setIsDelete(0);
+            papQues.setpId(pId);
+            papQues.setQuesId(quesId);
+            papQues.setUserId(userId);
+            papQues.setPqId(UUID.randomUUID().toString());
+            if (paperDao.addOneQuestion(papQues)!=1){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /*@Override
     public boolean addManyQuestion(List<Map<String,String>> pqList) {
         return paperDao.addManyQuestion(pqList)==pqList.size();
-    }
+    }*/
 
     @Override
     public boolean delQuestion(String pId, String[] quesIds) {
         return paperDao.delQuestion(pId,quesIds)==quesIds.length;
+    }
+
+    @Override
+    public boolean queryByRandNum(Paper paper) {
+        return paperDao.queryByRandNum(paper.getpId())==1;
     }
 }

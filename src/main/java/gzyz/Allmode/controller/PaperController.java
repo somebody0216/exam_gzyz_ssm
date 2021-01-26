@@ -104,7 +104,7 @@ public class PaperController {
     }
 
 
-    @RequestMapping("/paper/addManyQuestion")
+    /*@RequestMapping("/paper/addManyQuestion")
     @ResponseBody
     public Boolean addManyQuestion(@RequestBody Map<String,String> pqMap){
         String pId = pqMap.get("pId");
@@ -117,6 +117,16 @@ public class PaperController {
             pqList.add(map);
         }
         return paperService.addManyQuestion(pqList);
+
+    }*/
+
+    @RequestMapping("/paper/addManyQuestion")
+    @ResponseBody
+    public Boolean addManyQuestion(@RequestBody Map<String,String> pqMap){
+        String pId = pqMap.get("pId");
+        String userId=pqMap.get("userId");
+        String[] quesIdsArr=pqMap.get("quesIds").split(",");
+        return paperService.addManyQuestion(userId,pId,quesIdsArr);
 
     }
 

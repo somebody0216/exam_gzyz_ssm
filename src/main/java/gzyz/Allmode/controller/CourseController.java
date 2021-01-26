@@ -33,7 +33,7 @@ public class CourseController {
      */
     @RequestMapping("/question/type/addCourse")
     @ResponseBody
-    public boolean addCourse( Course course){
+    public boolean addCourse( @RequestBody Course course){
         System.out.println(course);
         return courseService.addCourse(course);
     }

@@ -25,7 +25,11 @@ public interface PaperService {
 
     public boolean addOneQuestion(PapQues papQues);
 
-    public boolean addManyQuestion(List<Map<String,String>> pqList);
+    /*public boolean addManyQuestion(List<Map<String,String>> pqList);*/
+    public boolean addManyQuestion(String userId,String pId,String[] quesIds);
 
     public boolean delQuestion(String pId, String[] quesIds);
+    public boolean queryByRandNum(Paper paper);
+
+
 }
