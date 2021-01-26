@@ -83,9 +83,15 @@ public class PaperController {
 
 
 //    查询试卷上的试题信息
+//    @RequestMapping("/paper/queryAllQuesByPid")
+//    @ResponseBody
+//    public List<Question> queryAllQuesByPid(@RequestBody Paper paper){
+//        return paperService.queryAllQuesByPid(paper.getpId());
+//    }
+
     @RequestMapping("/paper/queryAllQuesByPid")
     @ResponseBody
-    public List<Question> queryAllQuesByPid(@RequestBody Paper paper){
+    public List<Map<String,String>> queryAllQuesByPid(@RequestBody Paper paper){
         return paperService.queryAllQuesByPid(paper.getpId());
     }
 

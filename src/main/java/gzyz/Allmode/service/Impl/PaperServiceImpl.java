@@ -65,7 +65,7 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
-    public List<Question> queryAllQuesByPid(String pId) {
+    public List<Map<String,String>> queryAllQuesByPid(String pId) {
         return paperDao.queryAllQuesByPid(pId);
     }
 
