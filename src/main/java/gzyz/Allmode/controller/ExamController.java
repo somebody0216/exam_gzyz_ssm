@@ -75,12 +75,17 @@ public class ExamController {
 
     /**
      * 根据试卷查id询学生成绩统计(..)
-     * @param pId
+     * @param paper
      * @return
      */
     @RequestMapping("/exam/queryGrageBypid")
     @ResponseBody
-    public List<Map<String,Object>> queryGrageBypid( String pId){
-        return  examService.queryGrageBypid(pId);
+    public List<Map<String,Object>> queryGrageBypid(@RequestBody Paper paper){
+        System.out.println("进入Grage接口");
+        System.out.println("前端传入的pId="+paper.getpId());
+        for (Map ma:examService.queryGrageBypid(paper.getpId())){
+            System.out.println(ma);
+        }
+        return  examService.queryGrageBypid(paper.getpId());
     }
 }

@@ -7,6 +7,7 @@ import gzyz.Allmode.pojo.Student;
 import gzyz.Allmode.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -33,9 +34,13 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public boolean addStuPaperInfo(List<StuPaperInfo> stuPaperInfos) {
+    public boolean addStuPaperInfo( List<StuPaperInfo> stuPaperInfos) {
+        System.out.println("进入addStuPaperInfo方法");
+
         String stuId=stuPaperInfos.get(0).getStuId();
+        System.out.println(stuId);
         String pId=stuPaperInfos.get(0).getpId();
+        System.out.println(pId);
         for (StuPaperInfo stuPaperInfo : stuPaperInfos) {
             stuPaperInfo.setSpiId(UUID.randomUUID().toString());
             stuPaperInfo.setCreateTime(dateFormat.format(new Date()));

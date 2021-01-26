@@ -54,7 +54,9 @@ public class PaperClassifyController {
 
     @RequestMapping("/paper/queryOneClassify")
     @ResponseBody
-    public PaperClassify queryOneClassify(@RequestBody PaperClassify paperClassify){
+    public PaperClassify queryOneClassify( PaperClassify paperClassify){
+        System.out.println("进入queryOneClasify接口");
+        System.out.println(paperClassifyService.queryOneClassify(paperClassify.getPcId()));
         return paperClassifyService.queryOneClassify(paperClassify.getPcId());
     }
 
