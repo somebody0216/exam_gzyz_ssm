@@ -21,7 +21,7 @@ public interface PaperService {
 
     public boolean delManyPaper(String[] pIds);
 
-    public List<Question> queryAllQuesByPid(String pId);
+    public List<Map<String,String>> queryAllQuesByPid(String pId);
 
     public boolean addOneQuestion(PapQues papQues);
 
