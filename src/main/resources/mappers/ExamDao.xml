@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gzyz.Allmode.dao.ExamDao">
+    <insert id="addStudent" parameterType="gzyz.Allmode.pojo.Student">
+        insert into exam_student values(#{stuId},#{stuName},#{stuPhone},#{isDelete},#{createTime});
+    </insert>
+    <!--public int addStuPaperInfo(StuPaperInfo stuPaperInfo);-->
+    <insert id="addStuPaperInfo" parameterType="gzyz.Allmode.pojo.StuPaperInfo">
+        insert into exam_stupaperinfo values (#{spiId},#{stuId},#{pqId},#{myAns},#{isDelete},#{createTime});
+    </insert>
+    <!--public double querySumScore(String stuid);-->
+    <select id="querySumScore" resultType="double">
+        select count(ques_score) from (
+            select stu_id,my_ans,a.ques_id,ques_ans,ques_score from
+                (select stu_id,my_ans,ques_id from exam_stupaperinfo left JOIN exam_papques on exam_stupaperinfo.pq_id=exam_papques.pq_id where exam_stupaperinfo.stu_id=#{stuId} and exam_stupaperinfo.p_id=#{pId})
+                as a
+            LEFT join exam_question on a.ques_id=exam_question.ques_id
+        ) as b
+        where b.my_ans=b.ques_ans
+    </select>
+
+    <!--public List<Student> queryAllStudent(String pid);-->
+    <select id="queryAllStudent" parameterType="string" resultType="string">
+        select distinct stu_id from from exam_stupaperinfo where p_id=#{#{value};
+    </select>
+</mapper>

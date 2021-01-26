@@ -54,8 +54,8 @@ public class PaperClassifyController {
 
     @RequestMapping("/paper/queryOneClassify")
     @ResponseBody
-    public PaperClassify queryOneClassify(String pcId){
-        return paperClassifyService.queryOneClassify(pcId);
+    public PaperClassify queryOneClassify(@RequestBody PaperClassify paperClassify){
+        return paperClassifyService.queryOneClassify(paperClassify.getPcId());
     }
 
     @RequestMapping("/paper/editClassifyById")

@@ -3,22 +3,13 @@ package gzyz.Allmode.pojo;
 public class PapQues {
 
     private String pqId;
-    private String p_Id;
+    private String pId;
     private String quesId;
     private int isDelete;
     private String createTime;
     private String userId;
 
     public PapQues() {
-    }
-
-    public PapQues(String pqId, String p_Id, String quesId, int isDelete, String createTime, String userId) {
-        this.pqId = pqId;
-        this.p_Id = p_Id;
-        this.quesId = quesId;
-        this.isDelete = isDelete;
-        this.createTime = createTime;
-        this.userId = userId;
     }
 
     public String getPqId() {
@@ -29,12 +20,12 @@ public class PapQues {
         this.pqId = pqId;
     }
 
-    public String getP_Id() {
-        return p_Id;
+    public String getpId() {
+        return pId;
     }
 
-    public void setP_Id(String p_Id) {
-        this.p_Id = p_Id;
+    public void setpId(String pId) {
+        this.pId = pId;
     }
 
     public String getQuesId() {
@@ -73,7 +64,7 @@ public class PapQues {
     public String toString() {
         return "PapQues{" +
                 "pqId='" + pqId + '\'' +
-                ", p_Id='" + p_Id + '\'' +
+                ", p_Id='" + pId + '\'' +
                 ", quesId='" + quesId + '\'' +
                 ", isDelete=" + isDelete +
                 ", createTime='" + createTime + '\'' +

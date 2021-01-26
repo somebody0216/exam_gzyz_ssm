@@ -35,8 +35,10 @@
 
 
     <update id="editPaperById" parameterType="gzyz.Allmode.pojo.Paper">
-    update  exam_paper set p_title=#{pTitle} and pc_id=#{pcId} and p_start_time=#{pStartTime} and
-    p_end_time=#{pEndTime} and p_free=#{pFree} and p_status=#{pStatus} where p_id=#{pId};
+    <!--update  exam_paper set p_title=#{pTitle} and pc_id=#{pcId} and p_start_time=#{pStartTime} and
+    p_end_time=#{pEndTime} and p_free=#{pFree} and p_status=#{pStatus} where p_id=#{pId};-->
+        update  exam_paper set p_title=#{pTitle} ,pc_id=#{pcId} ,p_start_time=#{pStartTime},
+        p_end_time=#{pEndTime} ,p_free=#{pFree}, p_status=#{pStatus} where p_id=#{pId}
     </update>
 
 
@@ -48,7 +50,7 @@
     </select>
 
     <insert id="addOneQuestion" parameterType="gzyz.Allmode.pojo.PapQues">
-        insert into exam_papques(pq_id,p_id,ques_id,is_delete,create_time) values(pqId,pId,quesId,0,createTime)
+        insert into exam_papques(pq_id,p_id,ques_id,is_delete,create_time,user_id) values(#{pqId},#{pId},#{quesId},0,#{createTime},#{userId});
     </insert>
 
     <insert id="addManyQuestion">
@@ -64,5 +66,10 @@
             #{quesId}
         </foreach>
     </update>
+
+    <!--public int queryByRandNum(Paper paper);-->
+    <select id="queryByRandNum" parameterType="string" resultType="int">
+        select count(*) from exam_paper where p_id=#{value};
+    </select>
 
 </mapper>

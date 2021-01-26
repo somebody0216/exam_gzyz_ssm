@@ -33,4 +33,6 @@ public interface PaperDao {
     public int addManyQuestion(List<Map<String,String>> pqList);
 
     public int delQuestion(@Param("pId") String pId, @Param("quesIds") String[] quesIds);
+
+    public int queryByRandNum(String pid);
 }
