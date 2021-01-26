@@ -5,6 +5,7 @@ import gzyz.Allmode.pojo.StuPaperInfo;
 import gzyz.Allmode.pojo.Student;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author jun
@@ -13,5 +14,5 @@ import java.util.List;
 public interface ExamService {
     public Student addStudent(Student student);
     public boolean addStuPaperInfo(List<StuPaperInfo> stuPaperInfos);
-    public List<PaperStuGrade> queryGrageBypid(String pid);
+    public List<Map<String,Object>> queryGrageBypid(String pid);
 }

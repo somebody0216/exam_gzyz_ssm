@@ -14,6 +14,8 @@ import java.util.List;
 @Mapper
 public interface ExamDao {
     public int addStudent(Student student);
+
+    public Student queryStudentById(String stuId);
     public int addStuPaperInfo(StuPaperInfo stuPaperInfo);
 
     /**

@@ -50,7 +50,7 @@
         select q.ques_id quesId,q.ques_type quesType,q.cour_id courId,q.ques_title quesTitle,
         q.ques_sel_a quesSelA,q.ques_sel_b quesSelB,q.ques_sel_c quesSelC,q.ques_sel_d quesSelD,
         q.ques_ans quesAns,q.ques_score quesScore,q.ques_img quesImg,q.create_time createTime,pq.pq_id pqId
-         from exam_question q left join exam_papques pq on q.q_id=pq.q_id where pq.p_id=#{value};
+         from exam_question q left join exam_papques pq on q.ques_id=pq.ques_id where pq.p_id=#{value};
     </select>
 
     <insert id="addOneQuestion" parameterType="gzyz.Allmode.pojo.PapQues">

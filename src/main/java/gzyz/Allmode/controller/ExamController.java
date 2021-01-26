@@ -29,8 +29,8 @@ public class ExamController {
     @Autowired
     ExamService examService;
     /**
-     * 添加学生
-     * @param student
+     * 添加学生（OK）
+     * @param student  stuName stuPhone
      * @return
      */
     @RequestMapping("/exam/addStudent")
@@ -48,7 +48,7 @@ public class ExamController {
     }
 
     /**
-     * 验证随机码
+     * 验证随机码(OK)
      * @param paper
      * @return
      */
@@ -71,13 +71,13 @@ public class ExamController {
     }
 
     /**
-     * 根据试卷查询学生成绩
+     * 根据试卷查id询学生成绩统计(..)
      * @param pId
      * @return
      */
     @RequestMapping("/exam/queryGrageBypid")
     @ResponseBody
-    public List<PaperStuGrade> queryGrageBypid(@RequestBody String pId){
+    public List<Map<String,Object>> queryGrageBypid(@RequestBody String pId){
         return  examService.queryGrageBypid(pId);
     }
 }

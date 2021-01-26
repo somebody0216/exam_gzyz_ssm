@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author jun
@@ -50,11 +47,11 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public List<PaperStuGrade> queryGrageBypid(String pid) {
-        List<String> StudIds = examDao.queryAllStudent(pid);
-        ArrayList<PaperStuGrade> list=new ArrayList<>();
+    public List<Map<String,Object>> queryGrageBypid(String pid) {
+        List<String> StudIds = examDao.queryAllStudent(pid);//学生id集合
+        ArrayList<Map<String,Object>> resList=new ArrayList<>();//返回的结果集合
         for (String studId : StudIds) {
-            double score = examDao.querySumScore(studId, pid);
+            double score = examDao.querySumScore(studId, pid);//学生总分
             PaperStuGrade paperStuGrade=new PaperStuGrade();
             paperStuGrade.setCreateTime(dateFormat.format(new Date()));
             paperStuGrade.setIsDelete(0);
@@ -62,8 +59,13 @@ public class ExamServiceImpl implements ExamService {
             paperStuGrade.setPsgGrade(score);
             paperStuGrade.setStuId(studId);
             paperStuGrade.setPsgId(UUID.randomUUID().toString());
-            list.add(paperStuGrade);
+
+
+            HashMap<String,Object> map=new HashMap<>();
+            map.put("student",examDao.queryStudentById(studId));
+            map.put("paperStuGrade",paperStuGrade);
+            resList.add(map);
         }
-        return list;
+        return resList;
     }
 }

@@ -6,6 +6,11 @@
     <insert id="addStudent" parameterType="gzyz.Allmode.pojo.Student">
         insert into exam_student values(#{stuId},#{stuName},#{stuPhone},#{isDelete},#{createTime});
     </insert>
+    <!--public int queryStudentById(Student stuId);-->
+    <select id="queryStudentById" parameterType="string" resultType="gzyz.Allmode.pojo.Student">
+        select * from exam_student where stu_id=#{value};
+    </select>
+    
     <!--public int addStuPaperInfo(StuPaperInfo stuPaperInfo);-->
     <insert id="addStuPaperInfo" parameterType="gzyz.Allmode.pojo.StuPaperInfo">
         insert into exam_stupaperinfo values (#{spiId},#{stuId},#{pqId},#{myAns},#{isDelete},#{createTime});
@@ -23,6 +28,6 @@
 
     <!--public List<Student> queryAllStudent(String pid);-->
     <select id="queryAllStudent" parameterType="string" resultType="string">
-        select distinct stu_id from from exam_stupaperinfo where p_id=#{#{value};
+        select distinct stu_id from exam_stupaperinfo where p_id=#{value};
     </select>
 </mapper>
