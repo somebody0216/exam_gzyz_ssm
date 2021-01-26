@@ -38,7 +38,11 @@
     <!--update  exam_paper set p_title=#{pTitle} and pc_id=#{pcId} and p_start_time=#{pStartTime} and
     p_end_time=#{pEndTime} and p_free=#{pFree} and p_status=#{pStatus} where p_id=#{pId};-->
         update  exam_paper set p_title=#{pTitle} ,pc_id=#{pcId} ,p_start_time=#{pStartTime},
-        p_end_time=#{pEndTime} ,p_free=#{pFree}, p_status=#{pStatus} where p_id=#{pId}
+        p_end_time=#{pEndTime} ,p_free=#{pFree}, p_status=#{pStatus}
+        <if test="pTolScore!=0">
+            ,p_tol_score=#{pTolScore}
+        </if>
+        where p_id=#{pId}
     </update>
 
 
@@ -72,4 +76,11 @@
         select count(*) from exam_paper where p_id=#{value};
     </select>
 
+    <!-- public double querySumScore(String pId);-->
+    <select id="querySumScore" parameterType="string" resultType="double">
+        select count(a.ques_score) from (
+            select exam_papques.pq_id,exam_papques.p_id,exam_papques.ques_id,exam_question.ques_score from exam_papques LEFT JOIN exam_question on exam_papques.ques_id=exam.exam_papques.ques_id
+        )as a
+        where a.p_id=#{value};
+    </select>
 </mapper>

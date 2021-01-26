@@ -7,11 +7,9 @@ import gzyz.Allmode.pojo.Question;
 import gzyz.Allmode.service.PaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -68,8 +66,20 @@ public class PaperServiceImpl implements PaperService {
 
     @Override
     public boolean addOneQuestion(PapQues papQues) {
-        return paperDao.addOneQuestion(papQues)==1;
+        if (paperDao.addOneQuestion(papQues)==1){
+            double score = paperDao.querySumScore(papQues.getpId());
+            Paper paper = paperDao.queryPaperBypid(papQues.getpId());
+            paper.setpTolScore(score);//更改试卷总分
+            paperDao.editPaperById(paper);
+            return true;
+        }
+        return false;
     }
+
+    /*@Override
+    public boolean addOneQuestion(PapQues papQues) {
+        return paperDao.addOneQuestion(papQues)==1;
+    }*/
 
     @Override
     public boolean addManyQuestion(String userId,String pId, String[] quesIds) {
@@ -85,6 +95,10 @@ public class PaperServiceImpl implements PaperService {
                 return false;
             }
         }
+        double score = paperDao.querySumScore(pId);
+        Paper paper = paperDao.queryPaperBypid(pId);
+        paper.setpTolScore(score);//更改试卷总分
+        paperDao.editPaperById(paper);
         return true;
     }
 

@@ -35,4 +35,11 @@ public interface PaperDao {
     public int delQuestion(@Param("pId") String pId, @Param("quesIds") String[] quesIds);
 
     public int queryByRandNum(String pid);
+
+    /**
+     * 计算试卷的总分
+     * @param pId
+     * @return
+     */
+    public double querySumScore(String pId);
 }
