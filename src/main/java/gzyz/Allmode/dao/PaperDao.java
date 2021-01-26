@@ -26,7 +26,7 @@ public interface PaperDao {
 
     public int delManyPaper(@Param("pIds") String[] pIds);
 
-    public List<Map<String,String>> queryAllQuesByPid(String pId);
+    public List<Map<String,Object>> queryAllQuesByPid(String pId);
 
     public int addOneQuestion(PapQues papQues);
 

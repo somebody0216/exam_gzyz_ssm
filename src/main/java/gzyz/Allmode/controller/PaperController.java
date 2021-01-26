@@ -91,7 +91,7 @@ public class PaperController {
 
     @RequestMapping("/paper/queryAllQuesByPid")
     @ResponseBody
-    public List<Map<String,String>> queryAllQuesByPid(@RequestBody Paper paper){
+    public List<Map<String,Object>> queryAllQuesByPid(@RequestBody Paper paper){
         return paperService.queryAllQuesByPid(paper.getpId());
     }
 
