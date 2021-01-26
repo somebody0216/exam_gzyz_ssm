@@ -40,7 +40,7 @@ public class ExamController {
         HashMap<String,String> map=new HashMap<>();
         if (student1!=null){
             map.put("flag","1");
-            map.put("userId",student1.getStuId());
+            map.put("stuId",student1.getStuId());
         }else {
             map.put("flag","0");
         }
@@ -67,6 +67,9 @@ public class ExamController {
     @RequestMapping("/exam/addStuPaperInfo")
     @ResponseBody
     public boolean addStuPaperInfo(@RequestBody List<StuPaperInfo> list){
+        for (StuPaperInfo spi:list){
+            System.out.println(spi);
+        }
         return examService.addStuPaperInfo(list);
     }
 
@@ -77,7 +80,7 @@ public class ExamController {
      */
     @RequestMapping("/exam/queryGrageBypid")
     @ResponseBody
-    public List<Map<String,Object>> queryGrageBypid(@RequestBody String pId){
+    public List<Map<String,Object>> queryGrageBypid( String pId){
         return  examService.queryGrageBypid(pId);
     }
 }
