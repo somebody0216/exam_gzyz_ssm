@@ -34,6 +34,8 @@ public class ExamServiceImpl implements ExamService {
 
     @Override
     public boolean addStuPaperInfo(List<StuPaperInfo> stuPaperInfos) {
+        String stuId=stuPaperInfos.get(0).getStuId();
+        String pId=stuPaperInfos.get(0).getpId();
         for (StuPaperInfo stuPaperInfo : stuPaperInfos) {
             stuPaperInfo.setSpiId(UUID.randomUUID().toString());
             stuPaperInfo.setCreateTime(dateFormat.format(new Date()));
@@ -41,41 +43,25 @@ public class ExamServiceImpl implements ExamService {
             if (examDao.addStuPaperInfo(stuPaperInfo)!=1){
                 return false;
             }
-        }
+        }//单个学生成绩已经全部保存完毕
+
+
+        //计算单个学生的总分并保存
+        double score = examDao.querySumScore(stuId, pId);//学生总分
+        PaperStuGrade paperStuGrade=new PaperStuGrade();
+        paperStuGrade.setCreateTime(dateFormat.format(new Date()));
+        paperStuGrade.setIsDelete(0);
+        paperStuGrade.setpId(pId);
+        paperStuGrade.setPsgGrade(score);
+        paperStuGrade.setStuId(stuId);
+        paperStuGrade.setPsgId(UUID.randomUUID().toString());
+        examDao.addPaperStuGrade(paperStuGrade);
 
         return true;
     }
 
     @Override
-    public List<Map<String,Object>> queryGrageBypid(String pId) {
-        System.out.println("传入的值pId="+pId);
-        System.out.println("进入接口queryGrageBypid");
-        List<String> StudIds = examDao.queryAllStudent(pId);//学生id集合
-        System.out.println("StudIds="+StudIds);
-        ArrayList<Map<String,Object>> resList=new ArrayList<>();//返回的结果集合
-        for (String studId : StudIds) {
-            System.out.println("遍历学生ID = "+studId);
-            double score = examDao.querySumScore(studId, pId);//学生总分
-            System.out.println("学生总分="+score);
-            PaperStuGrade paperStuGrade=new PaperStuGrade();
-            paperStuGrade.setCreateTime(dateFormat.format(new Date()));
-            paperStuGrade.setIsDelete(0);
-            paperStuGrade.setpId(pId);
-            paperStuGrade.setPsgGrade(score);
-            paperStuGrade.setStuId(studId);
-            paperStuGrade.setPsgId(UUID.randomUUID().toString());
-
-
-            HashMap<String,Object> map=new HashMap<>();
-            map.put("student",examDao.queryStudentById(studId));
-            map.put("paperStuGrade",paperStuGrade);
-            resList.add(map);
-
-
-        }
-        for (Map ma:resList){
-            System.out.println(ma);
-        }
-        return resList;
+    public List<Map<String,Object>> queryGrageBypid(String pid) {
+        return examDao.queryAllGradeMsg(pid);
     }
 }

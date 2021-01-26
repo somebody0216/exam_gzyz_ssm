@@ -1,11 +1,13 @@
 package gzyz.Allmode.dao;
 
+import gzyz.Allmode.pojo.PaperStuGrade;
 import gzyz.Allmode.pojo.StuPaperInfo;
 import gzyz.Allmode.pojo.Student;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author jun
@@ -31,4 +33,13 @@ public interface ExamDao {
      * @return
      */
     public List<String> queryAllStudent(String pid);
+
+    public void addPaperStuGrade(PaperStuGrade paperStuGrade);
+
+    /**
+     * 查询总的成绩统计
+     * @param pId
+     * @return
+     */
+    public List<Map<String,Object>> queryAllGradeMsg(String pId);
 }
