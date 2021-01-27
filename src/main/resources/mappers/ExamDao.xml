@@ -8,7 +8,7 @@
     </insert>
     <!--public int queryStudentById(Student stuId);-->
     <select id="queryStudentById" parameterType="string" resultType="gzyz.Allmode.pojo.Student">
-        select * from exam_student where stu_id=#{value};
+        select * from exam_student where stu_id=#{value} and is_delete=0
     </select>
     
     <!--public int addStuPaperInfo(StuPaperInfo stuPaperInfo);-->
@@ -19,28 +19,29 @@
     <select id="querySumScore" resultType="double">
         select count(ques_score) from (
             select stu_id,my_ans,a.ques_id,ques_ans,ques_score from
-                (select stu_id,my_ans,ques_id from exam_stupaperinfo left JOIN exam_papques on exam_stupaperinfo.pq_id=exam_papques.pq_id where exam_stupaperinfo.stu_id=#{stuId} and exam_stupaperinfo.p_id=#{pId})
+                (select stu_id,my_ans,ques_id from exam_stupaperinfo left JOIN exam_papques on exam_stupaperinfo.pq_id=exam_papques.pq_id
+                    where exam_stupaperinfo.stu_id=#{stuId} and exam_stupaperinfo.p_id=#{pId} and exam_stupaperinfo.is_delete=0 and exam_papques.is_delete=0)
                 as a
-            LEFT join exam_question on a.ques_id=exam_question.ques_id
+            LEFT join exam_question on a.ques_id=exam_question.ques_id where exam_question.is_delete=0
         ) as b
         where b.my_ans=b.ques_ans
     </select>
 
     <!--public List<Student> queryAllStudent(String pid);-->
     <select id="queryAllStudent" parameterType="string" resultType="string">
-        select distinct stu_id from exam_stupaperinfo where p_id=#{value};
+        select distinct stu_id from exam_stupaperinfo where p_id=#{value} and is_delete=0
     </select>
 
 
     <!--public void adPaperStuGrade(PaperStuGrade paperStuGrade);-->
     <insert id="addPaperStuGrade" parameterType="gzyz.Allmode.pojo.PaperStuGrade">
-        insert into exam_paperstugrade VALUES(#{psgId},#{pId},#{stuId},#{psgGrade},#{isDelete},#{createTime});
+        insert into exam_paperstugrade VALUES(#{psgId},#{pId},#{stuId},#{psgGrade},#{isDelete},#{createTime})
     </insert>
 
     <!--public List<Map<String,Object>> queryAllGradeMsg(String pId);-->
     <select id="queryAllGradeMsg" parameterType="string" resultType="map">
         select ep.psg_id psgId,ep.p_id pId,ep.stu_id stuId,ep.psg_grade psgGrade,es.stu_name stuName,es.stu_phone stuPhone from exam_paperstugrade ep
         LEFT join exam_student es on ep.stu_id=es.stu_id
-        where ep.p_id=#{value}
+        where ep.p_id=#{value} and ep.is_delete=0 and es.is_delete=0
     </select>
 </mapper>

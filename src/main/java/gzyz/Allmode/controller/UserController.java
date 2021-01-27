@@ -26,8 +26,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
-
 //    用户注册
     @RequestMapping("/user/register")
     @ResponseBody
