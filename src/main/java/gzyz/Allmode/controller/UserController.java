@@ -46,18 +46,7 @@ public class UserController {
     }
 
 //    用户登录
-    /*@RequestMapping("/user/login")
-    @ResponseBody
-    public String userLogin(String user_phone,String user_pwd){
-        System.out.println(user_phone);
-        System.out.println(user_pwd);
-        String flag="0";
-        boolean b = userService.verifyLogin(user_phone, user_pwd);
-        if(b==true){
-            flag="1";
-        }
-        return flag;
-    }*/
+
     @RequestMapping("/user/login")
     @ResponseBody
     public Map<String,String> userLogin(String userPhone, String userPwd){
@@ -90,7 +79,7 @@ public class UserController {
    @ResponseBody
     public String editMyMsg(@RequestBody User u){
         String flag="0";
-       int i = userService.ModifyUserInfo(u.getUserPhone(),  u.getUserName(), u.getUserPwd());
+       int i = userService.ModifyUserInfo(u.getUserPhone(),  u.getUserName(), u.getUserPwd(),u.getUserImg(),u.getUserId());
        if(i==1){
            flag="1";
        }
@@ -100,8 +89,9 @@ public class UserController {
 //    头像上传
     @RequestMapping("/user/ImgUpload")
     @ResponseBody
-    public String ImgUpload(@RequestBody User u,HttpServletRequest request){
-        String flag="0";
+    public String ImgUpload( HttpServletRequest request){
+        String RealName="";
+//        String flag="0";
         //上传文件环境准备w
 //        本地文件传输到服务器端  服务器端存储文件的目录
         String savePath = request.getServletContext().getRealPath("/uploadFile");
@@ -172,14 +162,14 @@ public class UserController {
 //                    获取最终存储路径+UUID的文件名称
 //                    uploadFile\xxxxx\UUID_xxx.txt
                     String realSavePath = userService.makePath(savePath);
-                    String realname=realSavePath+"\\"+saveFileName;
+                     RealName=realSavePath+"\\"+saveFileName;
                     FileOutputStream out = new FileOutputStream(realSavePath + "\\" + saveFileName);
 
 
-                    int i = userService.ModifyUserImg(u.getUserPhone(), realname);
-                    if(i==1){
-                        flag="1";
-                    }
+//                    int i = userService.ModifyUserImg(u.getUserPhone(), realname);
+//                    if(i==1){
+//                        flag="1";
+//                    }
 
 
 //                    创建缓冲区
@@ -200,8 +190,8 @@ public class UserController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return flag;
+        System.out.println(RealName);
+        return RealName;
     }
 
 }

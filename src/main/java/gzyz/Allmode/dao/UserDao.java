@@ -17,5 +17,5 @@ import java.util.List;
 
         public int editMyMsg(User u);
 
-        public int ImgChange(User u);
+//        public int ImgChange(User u);
     }

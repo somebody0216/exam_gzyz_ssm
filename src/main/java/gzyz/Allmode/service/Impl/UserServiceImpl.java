@@ -89,24 +89,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int ModifyUserInfo(String user_phone, String user_name, String user_pwd) {
+    public int ModifyUserInfo(String user_phone, String user_name, String user_pwd,String userImg,String userId) {
         User u = new User();
         u.setUserPhone(user_phone);
         u.setUserName(user_name);
         u.setUserPwd(user_pwd);
+        u.setUserImg(userImg);
+        u.setUserId(userId);
         int i = userDao.editMyMsg(u);
         return i;
     }
 
-    @Override
-    public int ModifyUserImg(String user_phone,String user_img) {
-       User u = new User();
-       u.setUserPhone(user_phone);
-       u.setUserImg(user_img);
-        int i = userDao.ImgChange(u);
-
-        return i;
-    }
+//    @Override
+//    public int ModifyUserImg(String user_phone,String user_img) {
+//       User u = new User();
+//       u.setUserPhone(user_phone);
+//       u.setUserImg(user_img);
+//        int i = userDao.ImgChange(u);
+//
+//        return i;
+//    }
 
 
     //        真实文件名  UUID_xxx.txt

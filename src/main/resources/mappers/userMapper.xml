@@ -17,12 +17,12 @@
     </select>
     
     <update id="editMyMsg" parameterType="gzyz.Allmode.pojo.User">
-        update exam_user set user_name=#{userName},user_pwd=#{userPwd} where user_phone=#{userPhone} and user_role=0
+        update exam_user set user_name=#{userName},user_pwd=#{userPwd},user_img=#{userImg} where user_id=#{userId} and user_role=0
     </update>
 
-    <update id="ImgChange" parameterType="gzyz.Allmode.pojo.User">
-        update exam_user set user_img=#{userImg}  where user_phone= #{userPhone} and user_role=0
-    </update>
+<!--    <update id="ImgChange" parameterType="gzyz.Allmode.pojo.User">-->
+<!--        update exam_user set user_img=#{userImg}  where user_phone= #{userPhone} and user_role=0-->
+<!--    </update>-->
 
 
 </mapper>

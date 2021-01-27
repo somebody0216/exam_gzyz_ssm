@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gzyz.Allmode.dao.ManagerDao">
+
+<select id="queryMenu" resultType="gzyz.Allmode.pojo.Meau">
+    select * from exam_meau
+</select>
+
+<select id="queryAllUser" resultType="gzyz.Allmode.pojo.User">
+    select * from exam_user
+</select>
+
+<update id="managerUser" parameterType="string">
+    update exam_user set is_delete=1 where user_id=#{value};
+</update>
+
+
+    <insert id="addMenu" parameterType="gzyz.Allmode.pojo.Meau">
+        insert into exam_meau values(#{meauId},#{meauName},#{meauLevel},0,#{createTime})
+    </insert>
+
+
+    <update id="editMenu" parameterType="gzyz.Allmode.pojo.Meau">
+        update exam_meau set meau_name=#{meauName} and meau_level=#{meauLevel} where meau_id=#{meauId};
+    </update>
+
+
+    <update id="delOneMenu" parameterType="string">
+        update exam_meau set is_delete=1 where meau_id=#{value}
+    </update>
+
+    <update id="delManyMenu">
+        update exam_meau set is_delete=1 where meau_id in
+        <foreach collection="menuIds" item="menuId" open="(" close=")" separator=",">
+            #{menuId}
+        </foreach>
+    </update>
+
+
+    <select id="queryManagerInfo" resultType="gzyz.Allmode.pojo.User">
+        select * from exam_user where user_role=1 and is_delete=0
+    </select>
+</mapper>
