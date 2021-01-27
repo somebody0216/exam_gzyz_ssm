@@ -8,7 +8,6 @@ import gzyz.Allmode.service.PaperService;
 import gzyz.Allmode.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -68,6 +67,9 @@ public class ExamController {
     @RequestMapping("/exam/addStuPaperInfo")
     @ResponseBody
     public boolean addStuPaperInfo(@RequestBody List<StuPaperInfo> list){
+        for (StuPaperInfo spi:list){
+            System.out.println(spi);
+        }
         return examService.addStuPaperInfo(list);
     }
 
@@ -79,6 +81,11 @@ public class ExamController {
     @RequestMapping("/exam/queryGrageBypid")
     @ResponseBody
     public List<Map<String,Object>> queryGrageBypid(@RequestBody Paper paper){
+        System.out.println("进入Grage接口");
+        System.out.println("前端传入的pId="+paper.getpId());
+        for (Map ma:examService.queryGrageBypid(paper.getpId())){
+            System.out.println(ma);
+        }
         return  examService.queryGrageBypid(paper.getpId());
     }
 }

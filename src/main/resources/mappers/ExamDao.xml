@@ -39,8 +39,8 @@
 
     <!--public List<Map<String,Object>> queryAllGradeMsg(String pId);-->
     <select id="queryAllGradeMsg" parameterType="string" resultType="map">
-        select exam_paperstugrade.*,exam_student.stu_name,exam_student.stu_phone from exam_paperstugrade
-        LEFT join exam_student on exam_paperstugrade.stu_id=exam_student.stu_id
-        where exam_paperstugrade.p_id=#{value}
+        select ep.psg_id psgId,ep.p_id pId,ep.stu_id stuId,ep.psg_grade psgGrade,es.stu_name stuName,es.stu_phone stuPhone from exam_paperstugrade ep
+        LEFT join exam_student es on ep.stu_id=es.stu_id
+        where ep.p_id=#{value}
     </select>
 </mapper>
