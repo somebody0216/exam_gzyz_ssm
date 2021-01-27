@@ -9,11 +9,11 @@
 </select>
 
 <select id="queryAllUser" resultType="gzyz.Allmode.pojo.User">
-    select * from exam_user
+    select * from exam_user where user_role=0
 </select>
 
-<update id="managerUser" parameterType="string">
-    update exam_user set is_delete=1 where user_id=#{value};
+<update id="managerUser" parameterType="gzyz.Allmode.pojo.User">
+    update exam_user set is_delete=#{isDelete} where user_id=#{userId};
 </update>
 
 

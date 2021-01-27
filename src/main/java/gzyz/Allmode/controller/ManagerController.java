@@ -40,8 +40,9 @@ public class ManagerController {
     @RequestMapping("/User/queryAllUser")
     @ResponseBody
     public PageUtils queryAllUser(@RequestBody Map<String,String> map){
-        PageHelper.offsetPage(Integer.parseInt(map.get("offSet")),Integer.parseInt(map.get("pageNumber")));
         List<User> users = managerService.queryAllUser();
+        System.out.println("从数据库拿到的所有user:"+users);
+        PageHelper.offsetPage(Integer.parseInt(map.get("offSet")),Integer.parseInt(map.get("pageNumber")));
         PageInfo<User> pageInfo=new PageInfo<User>(users);
         return new PageUtils(new Long(pageInfo.getTotal()).intValue(),pageInfo.getList());
 
@@ -51,7 +52,8 @@ public class ManagerController {
     @RequestMapping("/Manager/managerUser")
     @ResponseBody
     public Boolean managerUser(@RequestBody User user){
-        return managerService.managerUser(user.getUserId());
+        System.out.println("从前端拿到的"+user);
+        return managerService.managerUser(user);
     }
 
 

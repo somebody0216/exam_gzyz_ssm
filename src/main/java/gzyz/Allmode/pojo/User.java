@@ -27,12 +27,13 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "userRole='" + userRole + '\'' +
-                ", userID='" + userId + '\'' +
+                "userRole=" + userRole +
+                ", userId='" + userId + '\'' +
                 ", userImg='" + userImg + '\'' +
                 ", userPhone='" + userPhone + '\'' +
                 ", userName='" + userName + '\'' +
                 ", userPwd='" + userPwd + '\'' +
+                ", isDelete=" + isDelete +
                 ", createTime='" + createTime + '\'' +
                 '}';
     }

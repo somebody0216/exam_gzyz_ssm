@@ -15,7 +15,7 @@ public interface ManagerDao {
 
     public List<User> queryAllUser();
 
-    public int managerUser(String userId);
+    public int managerUser(User user);
 
     public int addMenu(Meau meau);
 

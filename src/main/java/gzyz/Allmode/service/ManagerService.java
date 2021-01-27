@@ -12,7 +12,7 @@ public interface ManagerService {
 
     public List<User> queryAllUser();
 
-    public boolean managerUser(String userId);
+    public boolean managerUser(User user);
 
     public boolean addMenu(Meau meau);
 

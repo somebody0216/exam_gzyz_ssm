@@ -54,7 +54,7 @@ public class UserController {
         System.out.println(userPwd);
 
         User user =  userService.verifyLogin(userPhone, userPwd);
-        System.out.println(user);
+        System.out.println("从数据库拿到="+user);
         HashMap<String,String> map=new HashMap<String,String>();
         if (user==null){
             map.put("flag","0");
@@ -95,9 +95,10 @@ public class UserController {
         //上传文件环境准备w
 //        本地文件传输到服务器端  服务器端存储文件的目录
         String savePath = request.getServletContext().getRealPath("/uploadFile");
+//        String savePath = "http://localhost:8080/exam_gzyz_ssm/uploadFile";
 //   临时目录/缓存目录
         String tempPath = request.getServletContext().getRealPath("/tempFile");
-
+//        String tempPath = "http://localhost:8080/exam_gzyz_ssm/tempFile";
         File tmpFile= new File(tempPath);
         if(!tmpFile.exists()){
             tmpFile.mkdir();
@@ -190,7 +191,7 @@ public class UserController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(RealName);
+        System.out.println("服务端生成的路径："+RealName);
         return RealName;
     }
 

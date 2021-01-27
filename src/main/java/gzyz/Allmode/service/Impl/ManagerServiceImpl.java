@@ -28,8 +28,8 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public boolean managerUser(String userId) {
-        return managerDao.managerUser(userId)==1;
+    public boolean managerUser(User user) {
+        return managerDao.managerUser(user)==1;
     }
 
     @Override
