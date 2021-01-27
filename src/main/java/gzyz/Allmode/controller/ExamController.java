@@ -8,6 +8,7 @@ import gzyz.Allmode.service.PaperService;
 import gzyz.Allmode.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,7 +41,7 @@ public class ExamController {
         HashMap<String,String> map=new HashMap<>();
         if (student1!=null){
             map.put("flag","1");
-            map.put("userId",student1.getStuId());
+            map.put("stuId",student1.getStuId());
         }else {
             map.put("flag","0");
         }
@@ -72,12 +73,12 @@ public class ExamController {
 
     /**
      * 根据试卷查id询学生成绩统计(..)
-     * @param pId
+     * @param paper
      * @return
      */
     @RequestMapping("/exam/queryGrageBypid")
     @ResponseBody
-    public List<Map<String,Object>> queryGrageBypid(@RequestBody String pId){
-        return  examService.queryGrageBypid(pId);
+    public List<Map<String,Object>> queryGrageBypid(@RequestBody Paper paper){
+        return  examService.queryGrageBypid(paper.getpId());
     }
 }

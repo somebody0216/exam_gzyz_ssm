@@ -45,7 +45,6 @@ public class ExamServiceImpl implements ExamService {
             }
         }//单个学生成绩已经全部保存完毕
 
-
         //计算单个学生的总分并保存
         double score = examDao.querySumScore(stuId, pId);//学生总分
         PaperStuGrade paperStuGrade=new PaperStuGrade();

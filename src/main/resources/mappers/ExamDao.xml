@@ -13,7 +13,7 @@
     
     <!--public int addStuPaperInfo(StuPaperInfo stuPaperInfo);-->
     <insert id="addStuPaperInfo" parameterType="gzyz.Allmode.pojo.StuPaperInfo">
-        insert into exam_stupaperinfo values (#{spiId},#{stuId},#{pqId},#{myAns},#{isDelete},#{createTime});
+        insert into exam_stupaperinfo values (#{spiId},#{pId},#{stuId},#{pqId},#{myAns},#{isDelete},#{createTime});
     </insert>
     <!--public double querySumScore(String stuid);-->
     <select id="querySumScore" resultType="double">
