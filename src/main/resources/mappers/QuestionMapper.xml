@@ -66,10 +66,10 @@
     <select id="queryQuestionsByCondition" resultType="gzyz.Allmode.pojo.Question">
         select * from exam_question
         <where>
-            <if test="time1!=null">
+            <if test="time1!=null and time1!=''">
                 create_time > #{time1}
             </if>
-            <if test="time2!=null">
+            <if test="time2!=null and time2!=''">
                 and create_time &lt; #{time2}
             </if>
             <if test="type!=null">

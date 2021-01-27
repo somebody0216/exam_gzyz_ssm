@@ -15,7 +15,7 @@
     <filter-name>characterEncodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
     <init-param>
-      <param-name>encodin</param-name>
+      <param-name>encoding</param-name>
       <param-value>UTF-8</param-value>
     </init-param>
     <init-param>
