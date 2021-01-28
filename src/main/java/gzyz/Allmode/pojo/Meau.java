@@ -1,10 +1,13 @@
 package gzyz.Allmode.pojo;
 
-public class Meau {
+import java.io.Serializable;
 
+public class Meau implements Serializable {
     private String meauId;
     private String meauName;
     private int meauLevel;
+    private String meauParentId;
+    private String meauHref;
     private int isDelete;
     private String createTime;
 
@@ -68,5 +71,21 @@ public class Meau {
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    public String getMeauParentId() {
+        return meauParentId;
+    }
+
+    public void setMeauParentId(String meauParentId) {
+        this.meauParentId = meauParentId;
+    }
+
+    public String getMeauHref() {
+        return meauHref;
+    }
+
+    public void setMeauHref(String meauHref) {
+        this.meauHref = meauHref;
     }
 }

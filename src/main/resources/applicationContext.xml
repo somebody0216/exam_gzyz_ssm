@@ -87,8 +87,6 @@
         <property name="hashValueSerializer">
             <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
         </property>
-
-
     </bean>
 
 
