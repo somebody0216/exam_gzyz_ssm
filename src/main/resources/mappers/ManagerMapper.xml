@@ -5,7 +5,7 @@
 <mapper namespace="gzyz.Allmode.dao.ManagerDao">
 
 <select id="queryMenu" resultType="gzyz.Allmode.pojo.Meau">
-    select * from exam_meau
+    select * from exam_meau where is_delete=0
 </select>
 
 <select id="queryAllUser" resultType="gzyz.Allmode.pojo.User">
@@ -41,5 +41,14 @@
 
     <select id="queryManagerInfo" resultType="gzyz.Allmode.pojo.User">
         select * from exam_user where user_role=1 and is_delete=0
+    </select>
+
+
+    <select id="queryOneMenuById" parameterType="string" resultType="string">
+        select meau_name from exam_meau where meau_parent_id=#{value} and is_delete=0;
+    </select>
+
+    <select id="queryFirstMenu"  resultType="gzyz.Allmode.pojo.Meau">
+        select * from exam_meau where meau_level=1 and is_delete=0;
     </select>
 </mapper>

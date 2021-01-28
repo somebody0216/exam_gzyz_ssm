@@ -9,6 +9,7 @@ import gzyz.Allmode.pojo.Paper;
 import gzyz.Allmode.pojo.User;
 import gzyz.Allmode.service.ManagerService;
 import gzyz.Allmode.util.JDK8DateUtil;
+import gzyz.Allmode.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,9 @@ import java.util.UUID;
 
 @Controller
 public class ManagerController {
+
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Autowired
     private ManagerService managerService;
@@ -110,6 +114,24 @@ public class ManagerController {
         }
         return map;
     }
+
+
+//    根据Id查询菜单
+    @RequestMapping("/Manager/queryOneMenuById")
+    @ResponseBody
+    public String queryOneMenuById(String meauParentId){
+        return managerService.queryOneMenuById(meauParentId);
+
+    }
+
+
+//    查询所有一级菜单
+    @RequestMapping("/Manager/queryFirstMenu")
+    @ResponseBody
+    public List<Meau> queryFirstMenu(@RequestBody Meau meau){
+        return managerService.queryFirstMenu();
+    }
+
 }
 
 

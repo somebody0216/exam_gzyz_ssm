@@ -94,11 +94,9 @@ public class UserController {
 //        String flag="0";
         //上传文件环境准备w
 //        本地文件传输到服务器端  服务器端存储文件的目录
-        String savePath = request.getServletContext().getRealPath("/uploadFile");
-//        String savePath = "http://localhost:8080/exam_gzyz_ssm/uploadFile";
+        String savePath = request.getSession().getServletContext().getRealPath("/uploadFile/");
 //   临时目录/缓存目录
-        String tempPath = request.getServletContext().getRealPath("/tempFile");
-//        String tempPath = "http://localhost:8080/exam_gzyz_ssm/tempFile";
+        String tempPath = request.getSession().getServletContext().getRealPath("/tempFile/");
         File tmpFile= new File(tempPath);
         if(!tmpFile.exists()){
             tmpFile.mkdir();

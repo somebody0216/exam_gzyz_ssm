@@ -24,4 +24,8 @@ public interface ManagerService {
 
     public User verifyLogin(String userPhone,String userPwd);
 
+    public String queryOneMenuById(String meauParentId);
+
+    public List<Meau> queryFirstMenu();
+
 }

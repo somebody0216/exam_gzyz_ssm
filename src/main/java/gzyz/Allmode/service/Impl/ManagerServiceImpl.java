@@ -4,6 +4,7 @@ import gzyz.Allmode.dao.ManagerDao;
 import gzyz.Allmode.pojo.Meau;
 import gzyz.Allmode.pojo.User;
 import gzyz.Allmode.service.ManagerService;
+import gzyz.Allmode.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +15,21 @@ import java.util.List;
 public class ManagerServiceImpl implements ManagerService {
 
     @Autowired
+    private RedisUtil redisUtil;
+
+    @Autowired
     private ManagerDao managerDao;
 
 
     @Override
     public List<Meau> queryMenu() {
-        return managerDao.queryMenu();
+        if (redisUtil.exists("MeauInfo")){
+            return (List<Meau>) redisUtil.get("MeauInfo");
+        }else {
+            redisUtil.set("MeauInfo",managerDao.queryMenu());
+            return managerDao.queryMenu();
+        }
+//        return managerDao.queryMenu();
     }
 
     @Override
@@ -68,5 +78,21 @@ public class ManagerServiceImpl implements ManagerService {
         }
         System.out.println(user);
         return user;
+    }
+
+    @Override
+    public String queryOneMenuById(String meauParentId) {
+        return managerDao.queryOneMenuById(meauParentId);
+    }
+
+    @Override
+    public List<Meau> queryFirstMenu() {
+        if(redisUtil.exists("FirstMenuInfo")){
+            return (List<Meau>) redisUtil.get("FirstMenuInfo");
+        }else {
+            redisUtil.set("FirstMenuInfo",managerDao.queryFirstMenu());
+            return managerDao.queryFirstMenu();
+        }
+//        return managerDao.queryFirstMenu();
     }
 }

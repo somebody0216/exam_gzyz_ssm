@@ -13,6 +13,7 @@
 
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
+
     <context:component-scan base-package="gzyz.Allmode.controller"></context:component-scan>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
