@@ -23,7 +23,9 @@
 
 
     <update id="editMenu" parameterType="gzyz.Allmode.pojo.Meau">
-        update exam_meau set meau_name=#{meauName} and meau_level=#{meauLevel} where meau_id=#{meauId};
+        <!--update exam_meau set meau_name=#{meauName} and meau_level=#{meauLevel} where meau_id=#{meauId};-->
+        update exam_meau set meau_name=#{meauName} ,meau_level=#{meauLevel},
+        meau_parent_id=#{meauParentId},meau_href=#{meauHref} where meau_id=#{meauId};
     </update>
 
 
@@ -44,11 +46,16 @@
     </select>
 
 
-    <select id="queryOneMenuById" parameterType="string" resultType="string">
-        select meau_name from exam_meau where meau_id=#{value} and is_delete=0;
+    <select id="queryOneMenuById" parameterType="string" resultType="gzyz.Allmode.pojo.Meau">
+        select * from exam_meau where meau_id=#{value} and is_delete=0;
     </select>
 
     <select id="queryFirstMenu"  resultType="gzyz.Allmode.pojo.Meau">
         select * from exam_meau where meau_level=1 and is_delete=0;
+    </select>
+
+    <!--public int queryChildMeau(String meauId);-->
+    <select id="queryChildMeau" parameterType="string" resultType="int">
+        SELECT count(*) from exam_meau where meau_parent_id=#{value} and is_delete=0;
     </select>
 </mapper>

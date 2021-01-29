@@ -119,7 +119,7 @@ public class ManagerController {
 //    根据Id查询菜单
     @RequestMapping("/Manager/queryOneMenuById")
     @ResponseBody
-    public String queryOneMenuById(String meauParentId){
+    public Meau queryOneMenuById(String meauParentId){
         return managerService.queryOneMenuById(meauParentId);
 
     }

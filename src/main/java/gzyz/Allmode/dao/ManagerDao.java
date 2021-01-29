@@ -27,8 +27,10 @@ public interface ManagerDao {
 
     public List<User> queryManagerInfo();
 
-    public String queryOneMenuById(String meauParentId);
+    public Meau queryOneMenuById(String meauParentId);
 
     public List<Meau> queryFirstMenu();
+
+    public int queryChildMeau(String meauId);
 
 }

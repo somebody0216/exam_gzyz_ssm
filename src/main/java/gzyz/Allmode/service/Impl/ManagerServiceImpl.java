@@ -60,6 +60,10 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public boolean delOneMenu(String meauId) {
+        //验证是否有子菜单
+        if (managerDao.queryChildMeau(meauId)>0){
+            return false;
+        }
         int i = managerDao.delOneMenu(meauId);
         redisUtil.set("MeauInfo",managerDao.queryMenu());
         redisUtil.set("FirstMeauInfo",managerDao.queryFirstMenu());
@@ -68,6 +72,12 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public boolean delManyMenu(String[] menuIds) {
+        for (int i=0;i<menuIds.length;i++){
+            int i1 = managerDao.queryChildMeau(menuIds[i]);
+            if (i1>0){
+                return false;//含有有子菜单的一级菜单
+            }
+        }
         int i = managerDao.delManyMenu(menuIds);
         redisUtil.set("MeauInfo",managerDao.queryMenu());
         redisUtil.set("FirstMeauInfo",managerDao.queryFirstMenu());
@@ -93,7 +103,7 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public String queryOneMenuById(String meauParentId) {
+    public Meau queryOneMenuById(String meauParentId) {
         return managerDao.queryOneMenuById(meauParentId);
     }
 
