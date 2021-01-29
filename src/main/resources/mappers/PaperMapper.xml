@@ -22,8 +22,19 @@
     update exam_paper set is_delete=1 where p_id=#{value};
     </update>
 
+    <update id="delAllQuesInPaper" parameterType="string">
+        update exam_papques set is_delete=1 where p_id=#{value};
+    </update>
+
     <update id="delManyPaper">
         update exam_paper set is_delete=1 where p_id in
+        <foreach collection="pIds" open="(" close=")" separator="," item="p_id">
+            #{p_id}
+        </foreach>
+    </update>
+
+    <update id="delAllQuesInManyPaper">
+        update exam_papques set is_delete = 1 where p_id in
         <foreach collection="pIds" open="(" close=")" separator="," item="p_id">
             #{p_id}
         </foreach>

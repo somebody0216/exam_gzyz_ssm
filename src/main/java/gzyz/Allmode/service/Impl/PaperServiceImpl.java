@@ -42,6 +42,7 @@ public class PaperServiceImpl implements PaperService {
 
     @Override
     public boolean delOnePaper(String pId) {
+        paperDao.delAllQuesInPaper(pId);
         return paperDao.delOnePaper(pId)==1;
     }
 
@@ -57,6 +58,7 @@ public class PaperServiceImpl implements PaperService {
 
     @Override
     public boolean delManyPaper(String[] pIds) {
+        paperDao.delAllQuesInManyPaper(pIds);
         return paperDao.delManyPaper(pIds)==pIds.length;
     }
 
