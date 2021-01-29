@@ -18,7 +18,7 @@
 
 
     <insert id="addMenu" parameterType="gzyz.Allmode.pojo.Meau">
-        insert into exam_meau values(#{meauId},#{meauName},#{meauLevel},0,#{createTime})
+        insert into exam_meau values(#{meauId},#{meauName},#{meauLevel},#{meauParentId},#{meauHref},0,#{createTime});
     </insert>
 
 
@@ -45,7 +45,7 @@
 
 
     <select id="queryOneMenuById" parameterType="string" resultType="string">
-        select meau_name from exam_meau where meau_parent_id=#{value} and is_delete=0;
+        select meau_name from exam_meau where meau_id=#{value} and is_delete=0;
     </select>
 
     <select id="queryFirstMenu"  resultType="gzyz.Allmode.pojo.Meau">

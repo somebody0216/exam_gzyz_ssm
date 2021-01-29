@@ -62,7 +62,7 @@ public class ManagerController {
 
 
 //   添加菜单
-    @RequestMapping("")
+    @RequestMapping("/Manager/addMenu")
     @ResponseBody
     public Boolean addMenu(@RequestBody Meau meau){
         meau.setCreateTime(JDK8DateUtil.LocalDateTime2String(null,null));
@@ -128,7 +128,7 @@ public class ManagerController {
 //    查询所有一级菜单
     @RequestMapping("/Manager/queryFirstMenu")
     @ResponseBody
-    public List<Meau> queryFirstMenu(@RequestBody Meau meau){
+    public List<Meau> queryFirstMenu(){
         return managerService.queryFirstMenu();
     }
 
