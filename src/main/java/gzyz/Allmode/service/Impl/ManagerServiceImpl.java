@@ -44,22 +44,34 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public boolean addMenu(Meau meau) {
-        return managerDao.addMenu(meau)==1;
+        int i = managerDao.addMenu(meau);
+        redisUtil.set("MeauInfo",managerDao.queryMenu());
+        redisUtil.set("FirstMeauInfo",managerDao.queryFirstMenu());
+        return i==1;
     }
 
     @Override
     public boolean editMenu(Meau meau) {
-        return managerDao.editMenu(meau)==1;
+        int i = managerDao.editMenu(meau);
+        redisUtil.set("MeauInfo",managerDao.queryMenu());
+        redisUtil.set("FirstMeauInfo",managerDao.queryFirstMenu());
+        return i==1;
     }
 
     @Override
     public boolean delOneMenu(String meauId) {
-        return managerDao.delOneMenu(meauId)==1;
+        int i = managerDao.delOneMenu(meauId);
+        redisUtil.set("MeauInfo",managerDao.queryMenu());
+        redisUtil.set("FirstMeauInfo",managerDao.queryFirstMenu());
+        return i==1;
     }
 
     @Override
     public boolean delManyMenu(String[] menuIds) {
-        return managerDao.delManyMenu(menuIds)==menuIds.length;
+        int i = managerDao.delManyMenu(menuIds);
+        redisUtil.set("MeauInfo",managerDao.queryMenu());
+        redisUtil.set("FirstMeauInfo",managerDao.queryFirstMenu());
+        return i==menuIds.length;
     }
 
     @Override

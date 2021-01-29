@@ -62,7 +62,7 @@ public class ManagerController {
 
 
 //   添加菜单
-    @RequestMapping("")
+    @RequestMapping("/Manager/addMenu")
     @ResponseBody
     public Boolean addMenu(@RequestBody Meau meau){
         meau.setCreateTime(JDK8DateUtil.LocalDateTime2String(null,null));

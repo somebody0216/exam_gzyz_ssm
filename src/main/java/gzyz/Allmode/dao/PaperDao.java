@@ -20,11 +20,15 @@ public interface PaperDao {
 
     public int delOnePaper(String pId);
 
+    public int delAllQuesInPaper(String pId);
+
     public Paper queryPaperBypid(String pId);
 
     public int editPaperById(Paper paper);
 
     public int delManyPaper(@Param("pIds") String[] pIds);
+
+    public int delAllQuesInManyPaper(@Param("pIds") String[] pIds);
 
     public List<Map<String,Object>> queryAllQuesByPid(String pId);
 
