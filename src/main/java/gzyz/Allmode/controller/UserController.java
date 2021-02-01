@@ -161,8 +161,8 @@ public class UserController {
 //                    获取最终存储路径+UUID的文件名称
 //                    uploadFile\xxxxx\UUID_xxx.txt
                     String realSavePath = userService.makePath(savePath);
-                     RealName=realSavePath+"\\"+saveFileName;
-                    FileOutputStream out = new FileOutputStream(realSavePath + "\\" + saveFileName);
+                     RealName=realSavePath+"/"+saveFileName;
+                    FileOutputStream out = new FileOutputStream(realSavePath + "/" + saveFileName);
 
 
 //                    int i = userService.ModifyUserImg(u.getUserPhone(), realname);

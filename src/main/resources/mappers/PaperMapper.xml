@@ -15,7 +15,7 @@
         where user_id=#{userId};-->
         insert into exam_paper
         values
-        (#{pId},#{pTitle},#{pcId},#{pTolScore},#{pStartTime},#{pEndTime},#{pFree},#{pStatus},#{pRandNum},#{isDelete},#{createTime},#{userId});
+        (#{pId},#{pTitle},#{pcId},#{pTolScore},#{pStartTime},#{pEndTime},#{pFree},#{pRandNum},#{pStatus},#{isDelete},#{createTime},#{userId});
     </insert>
 
     <update id="delOnePaper" parameterType="string">

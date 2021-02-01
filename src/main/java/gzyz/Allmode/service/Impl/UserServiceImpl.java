@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
     public String makePath(String savaPath){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String dataPath = sdf.format(new Date());
-        String dir = savaPath+"\\"+dataPath;
+        String dir = savaPath+"/"+dataPath;
         File file = new File(dir);
         if (!file.exists()){
             file.mkdirs();
